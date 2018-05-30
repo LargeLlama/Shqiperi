@@ -15,6 +15,7 @@ OBSTACLES OVERCOME
 - Displaying the actual grid
 - Creating the Cell class and making it out of lines instead of rectangles
 - Start the algorithm
+- Able to remove walls, now it's starting to look like a maze!
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
