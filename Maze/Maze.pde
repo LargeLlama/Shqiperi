@@ -47,7 +47,7 @@ void draw() {
   if (neighbor != null && !neighbor.visited)
   {
     neighbor.visited = true;  //sets the neighbors visited value to true
-    removeWalls(current, neighbor);
+    removeWalls(current, neighbor); //removes the needed walls
     
     current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
   }
@@ -55,26 +55,34 @@ void draw() {
 
   void removeWalls(Cell a, Cell b) 
   {
+    //grabs the difference between the x values
     int x = (b.x / w) - (a.x / w);
-    print("x diff: " + x + "\n");
+    //uncomment for debugging
+    //print("x diff: " + x + "\n");
+    
+    //if it's 1, then it is to the right
     if ( x == 1)
     {
       a.walls[1] = false;
       b.walls[3] = false;
     }
+    //if it's -1, it's to the left
     else if ( x == -1)
     {
        a.walls[3] = false;
        b.walls[1] = false;
     }
-
+    //grabs the y value to calculate where the other block is
     int y = (b.y / w) - (a.y / w);
-    print("y diff: " + y + "\n");
+    //uncomment for debugging
+    //print("y diff: " + y + "\n"); 
+    //if it's 1, it's above
     if (y == 1)
     {
       a.walls[2] = false;
       b.walls[0] = false;
     }
+    //if it's -1, it's below
     else if (y == -1)
     {
       a.walls[0] = false;
