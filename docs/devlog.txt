@@ -12,28 +12,33 @@ Have our courageous Albanian hero Dubim fight in this rougelike adventure!
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<Wow, we so BOSS bc...>
+- Displaying the actual grid
+- Creating the Cell class and making it out of lines instead of rectangles
+- Start the algorithm
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<
-blah blah pesky bug...
-maybe some of these will move into the Obs.Ovrcm section...
->
+- Serbia still exists
+- Albania is not a world power
+- The algorithm stops running when a "dead end" is reached (it's surrounded by cells that have been visited)
+- Tim is still obese
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<wow! oo! etc!...>
+- Albania is the greatest country ever to exist
+- Baklava is great
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We changed ___ to ___ bc...
-<etc>
-<etc>
+We changed our cells to be rectangles to just being a collection of lines in order to make the whole process of removing the lines easier
+We changed our algorithm to utilize elements of the recursive backtrack
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-<tales of wisdom gained...>
+Utilizing an array of booleans to determine whether to draw the lines is very useful and inituitive
+
+
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -49,6 +54,11 @@ LESSONS LEARNED
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+2018-05-30
+--------------------------------------------------------------
+Rubin Peci :: Work on the maze generation and the devlog
+Dan Gelfand :: Work on the maze generation
+Tim Marder :: Work on the maze generation
 
 2018-05-29
 --------------------------------------------------------------
