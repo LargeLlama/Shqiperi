@@ -4,18 +4,22 @@ int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
 Cell neighbor; //the next cell
+static int order = 1;
+
 
 void setup() {
   //draws the window to be 400 by 400
   size(400, 400);
 
   //uncomment to slow down the maze generation to see it in action
-  frameRate(5);
+  frameRate(1);
   //sets number of columns = to width divided by object width
   cols = width/w;
 
   //sets number of rows = to height divided by object width
   rows = height/w;
+
+
 
   //sets a grid array to columns and rows (I.E. (5,3) would be column 5 row 3
   grid = new Cell[cols][rows];
@@ -40,55 +44,86 @@ void draw() {
     }
   }
   //sets the current cell visited variable to true, and gets the next neighbor
-  current.visited = true;
-  neighbor = current.checkNeighbors();
+  if (current!=null) {
+    current.visited = true;
 
-  //makes sure the neighbor isn't null and that it wasn't visited 
-  if (neighbor != null && !neighbor.visited)
-  {
-    neighbor.visited = true;  //sets the neighbors visited value to true
-    removeWalls(current, neighbor); //removes the needed walls
-    
-    current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
+    //set cell's order
+    if (current.o == 0) {
+      current.o = order; 
+      //update the order
+      order+=1;
+    }
+
+    neighbor = current.checkNeighbors();
+
+
+    //makes sure the neighbor isn't null and that it wasn't visited
+    if (neighbor != null && !neighbor.visited)
+    {
+      neighbor.visited = true;  //sets the neighbors visited value to true
+      removeWalls(current, neighbor); //removes the needed walls
+
+      current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
+    }
+
+    //no neighbors
+    else {
+      current.noNeighbors = true;
+      current = cellWithOrder(current.o-1);
+    }
   }
 }
+void removeWalls(Cell a, Cell b)
+{
+  //grabs the difference between the x values
+  int x = (b.x / w) - (a.x / w);
+  //uncomment for debugging
+  //print("x diff: " + x + "\n");
 
-  void removeWalls(Cell a, Cell b) 
+  //if it's 1, then it is to the right
+  if ( x == 1)
   {
-    //grabs the difference between the x values
-    int x = (b.x / w) - (a.x / w);
-    //uncomment for debugging
-    //print("x diff: " + x + "\n");
-    
-    //if it's 1, then it is to the right
-    if ( x == 1)
-    {
-      a.walls[1] = false;
-      b.walls[3] = false;
-    }
-    //if it's -1, it's to the left
-    else if ( x == -1)
-    {
-       a.walls[3] = false;
-       b.walls[1] = false;
-    }
-    //grabs the y value to calculate where the other block is
-    int y = (b.y / w) - (a.y / w);
-    //uncomment for debugging
-    //print("y diff: " + y + "\n"); 
-    //if it's 1, it's above
-    if (y == 1)
-    {
-      a.walls[2] = false;
-      b.walls[0] = false;
-    }
-    //if it's -1, it's below
-    else if (y == -1)
-    {
-      a.walls[0] = false;
-      b.walls[2] = false;
+    a.walls[1] = false;
+    b.walls[3] = false;
+  }
+  //if it's -1, it's to the left
+  else if ( x == -1)
+  {
+    a.walls[3] = false;
+    b.walls[1] = false;
+  }
+  //grabs the y value to calculate where the other block is
+  int y = (b.y / w) - (a.y / w);
+  //uncomment for debugging
+  //print("y diff: " + y + "\n");
+  //if it's 1, it's above
+  if (y == 1)
+  {
+    a.walls[2] = false;
+    b.walls[0] = false;
+  }
+  //if it's -1, it's below
+  else if (y == -1)
+  {
+    a.walls[0] = false;
+    b.walls[2] = false;
+  }
+  //debugging
+  //println(current.o);
+  //println(current);
+}
+
+//axuiliary method use to find the cell with a particular order
+Cell cellWithOrder(int order) {
+  for (int r = 0; r < grid.length; r++) {
+    for (int c = 0; c < grid[0].length; c++) {
+      if (grid[r][c].o == order) {
+        return grid[r][c];
+      }
     }
   }
+  return null;
+}
 
 class Cell {
   //Cell Class variables
@@ -101,11 +136,13 @@ class Cell {
   Cell left = null;
 
   boolean visited = false;
-  
+  boolean noNeighbors = false;
+  int o; // cell's order; used to find latest cell;
+
 
 
   //creates temporary variables when Cell is called to create grid
-  Cell(int i, int j) 
+  Cell(int i, int j)
   {
     x = i*w;
     y = j*w;
@@ -118,7 +155,7 @@ class Cell {
     int x = this.x / w;
     int y = this.y / w;
 
-    if (y + 1 < grid[x].length) 
+    if (y + 1 < grid[x].length)
       top = grid[x][y + 1];
 
     if (x + 1 < grid.length)
@@ -146,18 +183,19 @@ class Cell {
     {
       neighbors.add(left);
     }
-
+    //println(neighbors);
     if (neighbors.size() > 0)
-    { 
+    {
       int random = floor(random(neighbors.size()));
       return neighbors.get(random);
     } else
     {
+      noNeighbors = true;
       return null;
     }
   }
 
-  void display() 
+  void display()
   {
     //trbl = top right bottom left
 
@@ -183,9 +221,13 @@ class Cell {
     }
 
     //colors current cell
-    if (visited) {
+    if (visited && !noNeighbors) {
       noStroke();
       fill(255, 0, 255, 100);
+      rect(x, y, w, w);
+    } else {
+      noStroke();
+      fill(256);
       rect(x, y, w, w);
     }
   }
