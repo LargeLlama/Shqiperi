@@ -8,7 +8,7 @@ Cell neighbor; //the next cell
 void setup() {
   //draws the window to be 400 by 400
   size(400, 400);
-  
+
   //uncomment to slow down the maze generation to see it in action
   frameRate(5);
   //sets number of columns = to width divided by object width
@@ -47,9 +47,40 @@ void draw() {
   if (neighbor != null && !neighbor.visited)
   {
     neighbor.visited = true;  //sets the neighbors visited value to true
+    removeWalls(current, neighbor);
+    
     current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
   }
 }
+
+  void removeWalls(Cell a, Cell b) 
+  {
+    int x = (b.x / w) - (a.x / w);
+    print("x diff: " + x + "\n");
+    if ( x == 1)
+    {
+      a.walls[1] = false;
+      b.walls[3] = false;
+    }
+    else if ( x == -1)
+    {
+       a.walls[3] = false;
+       b.walls[1] = false;
+    }
+
+    int y = (b.y / w) - (a.y / w);
+    print("y diff: " + y + "\n");
+    if (y == 1)
+    {
+      a.walls[2] = false;
+      b.walls[0] = false;
+    }
+    else if (y == -1)
+    {
+      a.walls[0] = false;
+      b.walls[2] = false;
+    }
+  }
 
 class Cell {
   //Cell Class variables
@@ -62,6 +93,7 @@ class Cell {
   Cell left = null;
 
   boolean visited = false;
+  
 
 
   //creates temporary variables when Cell is called to create grid
@@ -77,7 +109,7 @@ class Cell {
     //sets a local x variable that is easier to work with
     int x = this.x / w;
     int y = this.y / w;
-    
+
     if (y + 1 < grid[x].length) 
       top = grid[x][y + 1];
 
@@ -144,6 +176,7 @@ class Cell {
 
     //colors current cell
     if (visited) {
+      noStroke();
       fill(255, 0, 255, 100);
       rect(x, y, w, w);
     }
