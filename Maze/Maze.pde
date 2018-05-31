@@ -199,6 +199,7 @@ class Cell {
   {
     //trbl = top right bottom left
 
+
     //creates walls for top side of cells
     stroke(0);
     if (walls[0]) {
@@ -227,11 +228,14 @@ class Cell {
       rect(x, y, w, w);
     } else {
       noStroke();
-      fill(256);
+      fill(0,103,0,60);
       rect(x, y, w, w);
     }
+    if (this==current) {
+      fill(153, 0,0);
+      rect(x,y,w,w);
+    }
   }
-
   String toString()
   {
     return "x: " + x + "\ny: " + y + "\n";
