@@ -4,6 +4,7 @@ int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
 Cell neighbor; //the next cell
+Cell exit; //the exit
 static int order = 1;
 
 
@@ -31,6 +32,8 @@ void setup() {
     }
   }
   current = grid[(int)random(10)][(int)random(10)];
+  exit = grid[(int)random(10)][9];
+  exit.isExit = true;
 }
 
 void draw() {
@@ -134,11 +137,12 @@ class Cell {
   Cell right = null;
   Cell bottom = null;
   Cell left = null;
-
+  
   boolean visited = false;
   boolean noNeighbors = false;
   int o; // cell's order; used to find latest cell;
 
+  boolean isExit = false; //determines whether the cell is an exit - false by default
 
 
   //creates temporary variables when Cell is called to create grid
