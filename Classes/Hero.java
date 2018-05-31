@@ -38,4 +38,26 @@ public class Hero {
 		
 	}
 	
+	public static void main( String[] args ) {
+		
+		Hero character1 = new Hero();
+		System.out.println( character1.getName() );
+		System.out.println( character1.getHealth() );
+		System.out.println( character1.isAlive() );
+		character1.lowerHealth( 20 );
+		System.out.println( character1.getHealth() );
+		System.out.println( character1.isAlive() );
+		
+		System.out.println( "\n" );
+		
+		Hero character2 = new Hero( "Timothy" );
+		System.out.println( character2.getName() );
+		System.out.println( character2.getHealth() );
+		System.out.println( character2.isAlive() );
+		character2.lowerHealth( 105 );
+		System.out.println( character2.getHealth() );
+		System.out.println( character2.isAlive() );
+		
+	}
+	
 }
