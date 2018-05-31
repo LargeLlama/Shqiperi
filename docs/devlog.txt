@@ -15,14 +15,14 @@ OBSTACLES OVERCOME
 - Displaying the actual grid
 - Creating the Cell class and making it out of lines instead of rectangles
 - Start the algorithm
-- Able to remove walls, now it's starting to look like a maze!
-
+- Maze algo done!
+ 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Serbia still exists
 - Albania is not a world power
-- The algorithm stops running when a "dead end" is reached (it's surrounded by cells that have been visited)
 - Tim is still obese
+- Implementing .java files with packages into our processing files
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -38,6 +38,7 @@ We changed our algorithm to utilize elements of the recursive backtrack
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Utilizing an array of booleans to determine whether to draw the lines is very useful and inituitive
+Superclasses have immense value - saves a lot of time copying code
 
 
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -54,6 +55,12 @@ Utilizing an array of booleans to determine whether to draw the lines is very us
     \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+2018-05-31
+--------------------------------------------------------------
+Rubin Peci :: Fix a kink in the maze generation, create class hierarchies and packages for items and entities
+Dan Gelfand :: Finish the maze generation
+Tim Marder ::  
 
 2018-05-30
 --------------------------------------------------------------
