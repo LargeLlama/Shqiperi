@@ -1,0 +1,23 @@
+Crucial Jobs
+- Generating Maze (prerequisite for placing sprite)
+  * collaborative
+- Creating starting and ending markers for the maze
+- Placing sprite in Maze (prerequisite for sprite movement)
+- Moving sprite through maze
+- Traps
+
+Non-essential:
+
+- Sprite movement animation
+  * collaborative
+- Adding enemies
+
+Maze generation by 2018-05-31
+
+Sprite inside maze with movement by 2018-06-01
+
+Traps by 2018-06-02
+
+Movement animation by 2018-06-03
+
+Enemies by 2018-06-05
