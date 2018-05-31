@@ -1,42 +1,23 @@
-public class Hero {
-	
-	//Instance Variables
-	public String name;
-	public int health;
+package entities;
+
+import java.util.ArrayList;
+import items.*;
+
+public class Hero extends Entity {
+
+    private ArrayList<Item> _inventory;
 	
 	//Constructors
 	public Hero() {
-		
-		name = "Dubin";
-		health = 100;
-		
+		super("Dubim");
+        _inventory = new ArrayList<Item>();
 	}
-	
-	public Hero( String n ) {
-		
-		this();
-		name = n;
-		
-	}
-	
-	//Accessors
-	public String getName() { return name; }
-	
-	public int getHealth() { return health; }
-	
-	
-	//Methods
-	public boolean isAlive() {
-		
-		return health > 0;
-		
-	}
-	
-	public void lowerHealth( int damageTaken ) {
-		
-		health = health - damageTaken;
-		
-	}
+
+    public Hero(String name)
+    {
+        super(name);
+        _inventory = new ArrayList<Item>();
+    }
 	
 	public static void main( String[] args ) {
 		
