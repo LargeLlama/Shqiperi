@@ -32,14 +32,15 @@ void setup() {
       grid[i][j] = new Cell(i, j);
     }
   }
-  current = grid[(int)random(10)][(int)random(10)];
+  current = grid[0][0];
   exit = grid[(int)random(10)][9];
   exit.isExit = true;
 }
 
 void draw() {
   //sets background color
-  background(255);
+  //background(0,0,0,10);
+  //background(255);
 
   //displays the grid
   for (int i=0; i<grid.length; i++) {
@@ -47,36 +48,38 @@ void draw() {
       grid[i][j].display();
     }
   }
-  //sets the current cell visited variable to true, and gets the next neighbor
-  if (current!=null) {
-    current.visited = true;
 
-    //set cell's order
-    if (current.o == 0) {
-      current.o = order; 
-      //update the order
-      order+=1;
-    }
+    //sets the current cell visited variable to true, and gets the next neighbor
+    if (current!=null) {
+      current.visited = true;
 
-    neighbor = current.checkNeighbors();
+      //set cell's order
+      if (current.o == 0) {
+        current.o = order; 
+        //update the order
+        order+=1;
+      }
+
+      neighbor = current.checkNeighbors();
 
 
-    //makes sure the neighbor isn't null and that it wasn't visited
-    if (neighbor != null && !neighbor.visited)
-    {
-      neighbor.visited = true;  //sets the neighbors visited value to true
-      removeWalls(current, neighbor); //removes the needed walls
+      //makes sure the neighbor isn't null and that it wasn't visited
+      if (neighbor != null && !neighbor.visited)
+      {
+        neighbor.visited = true;  //sets the neighbors visited value to true
+        removeWalls(current, neighbor); //removes the needed walls
 
-      current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
-    }
+        current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
+      }
 
-    //no neighbors
-    else {
-      current.noNeighbors = true;
-      current = cellWithOrder(current.o-1);
+      //no neighbors
+      else {
+        current.noNeighbors = true;
+        current = cellWithOrder(current.o-1);
+      }
     }
   }
-}
+
 void removeWalls(Cell a, Cell b)
 {
   //grabs the difference between the x values
@@ -121,8 +124,11 @@ void removeWalls(Cell a, Cell b)
 Cell cellWithOrder(int order) {
   for (int r = 0; r < grid.length; r++) {
     for (int c = 0; c < grid[0].length; c++) {
-      if (grid[r][c].o == order) {
+      if (grid[r][c].o == order && !grid[r][c].noNeighbors ) {
         return grid[r][c];
+      }
+      else if (grid[r][c].o == order && grid[r][c].noNeighbors ){
+        return cellWithOrder(order - 1);
       }
     }
   }
@@ -138,7 +144,7 @@ class Cell {
   Cell right = null;
   Cell bottom = null;
   Cell left = null;
-  
+
   boolean visited = false;
   boolean noNeighbors = false;
   int o; // cell's order; used to find latest cell;
@@ -233,12 +239,12 @@ class Cell {
       rect(x, y, w, w);
     } else {
       noStroke();
-      fill(0,103,0,60);
+      fill(0, 103, 0, 60);
       rect(x, y, w, w);
     }
     if (this==current) {
-      fill(153, 0,0);
-      rect(x,y,w,w);
+      fill(255);
+      rect(x, y, w, w);
     }
   }
   String toString()
