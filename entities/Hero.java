@@ -7,6 +7,7 @@ public class Hero extends Entity {
 
     private ArrayList<Item> _inventory;
     private int _inventorySize;
+    private int _maxHealth;
 	
 	//Constructors
 	public Hero()
@@ -14,6 +15,7 @@ public class Hero extends Entity {
 		super("Dubim");
         _inventory = new ArrayList<Item>();
         _inventorySize = 10;
+        _maxHealth = 100;
 	}
 
     public Hero(String name)
@@ -21,9 +23,22 @@ public class Hero extends Entity {
         super(name);
         _inventory = new ArrayList<Item>();
         _inventorySize = 10;
+        _maxHealth = 100;
     }
 
     public int getInventorySize() { return _inventorySize; }
+
+    @Override
+    public int setHealth(int health)
+    {
+        if (health > _maxHealth)
+        {
+            return _health;
+        }
+        int tmp = _health;
+        _health = health;
+        return tmp;
+    }
 
     public String showInventory()
     {
@@ -42,14 +57,32 @@ public class Hero extends Entity {
         return tmp;
     }
     
-    public boolean isFull() { return _inventory.size >= _inventorySize }
+    public boolean isFull() { return _inventory.size() >= _inventorySize; }
 
     public boolean addItem(Item item)
     {
-        if (isFull())
+        if (!isFull())
         {
             _inventory.add(item);
             return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
+    
+    public boolean useItem(Item item)
+    {
+        if(_inventory.contains(item))
+        {
+            try 
+            {
+                item.use(this);
+                _inventory.remove(item);
+                return true;
+            }
+            catch (Exception e) { return false; }
         }
         else 
         {
@@ -66,15 +99,20 @@ public class Hero extends Entity {
 		character1.lowerHealth( 20 );
 		System.out.println( character1.getHealth() );
 		System.out.println( character1.isAlive() );
-		
+        Food beef = new Food("Beef", 10);
+		character1.addItem(beef);
+        System.out.print(character1.showInventory());
+        character1.useItem(beef);
+        System.out.println(character1.showInventory());
+        System.out.println( character1.getHealth());
 		System.out.println( "\n" );
-		
+	/*	
 		Hero character2 = new Hero( "Timothy" );
 		System.out.println( character2.getName() );
 		System.out.println( character2.getHealth() );
 		System.out.println( character2.isAlive() );
 		character2.lowerHealth( 105 );
 		System.out.println( character2.getHealth() );
-		System.out.println( character2.isAlive() );
+		System.out.println( character2.isAlive() ); */
 	}
 }
