@@ -8,25 +8,27 @@ public class Hero extends Entity {
     private ArrayList<Item> _inventory;
     private int _inventorySize;
     private int _maxHealth;
+    private int _level;
+    private int _exp;
+    private int _expToNextLvl; 
 	
-	//Constructors
 	public Hero()
     {
-		super("Dubim");
+        super("Dubim");
         _inventory = new ArrayList<Item>();
         _inventorySize = 10;
         _maxHealth = 100;
-	}
-
-    public Hero(String name)
-    {
-        super(name);
-        _inventory = new ArrayList<Item>();
-        _inventorySize = 10;
-        _maxHealth = 100;
+        _level = 1;
+        _exp = 0;
+        _expToNextLvl = 10;
     }
 
     public int getInventorySize() { return _inventorySize; }
+    
+    public int getLevel() { return _level; }
+    public int getExp() { return _exp; }
+    public int getLevelUp() { return _expToNextLvl; }
+    
 
     @Override
     public int setHealth(int health)
@@ -55,6 +57,23 @@ public class Hero extends Entity {
         int tmp = _inventorySize;
         _inventorySize = newSize;
         return tmp;
+    }
+    
+    public int setLevel(int level)
+    {
+        int tmp = _level;
+        _level = level;
+        return tmp;
+    }
+
+    public void levelUp()
+    {
+        if (_exp >= _expToNextLvl)
+        {
+            _exp = _exp - _expToNextLvl;
+            setLevel(_level++);
+            _expToNextLvl += 10;
+        } 
     }
     
     public boolean isFull() { return _inventory.size() >= _inventorySize; }
@@ -96,23 +115,18 @@ public class Hero extends Entity {
 		System.out.println( character1.getName() );
 		System.out.println( character1.getHealth() );
 		System.out.println( character1.isAlive() );
+
 		character1.lowerHealth( 20 );
 		System.out.println( character1.getHealth() );
 		System.out.println( character1.isAlive() );
+
         Food beef = new Food("Beef", 10);
 		character1.addItem(beef);
         System.out.print(character1.showInventory());
         character1.useItem(beef);
+
         System.out.println(character1.showInventory());
         System.out.println( character1.getHealth());
 		System.out.println( "\n" );
-	/*	
-		Hero character2 = new Hero( "Timothy" );
-		System.out.println( character2.getName() );
-		System.out.println( character2.getHealth() );
-		System.out.println( character2.isAlive() );
-		character2.lowerHealth( 105 );
-		System.out.println( character2.getHealth() );
-		System.out.println( character2.isAlive() ); */
 	}
 }

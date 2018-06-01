@@ -1,3 +1,7 @@
+Shqiperi
+Tim Marder, Rubin Peci, Dan Gelfand
+APCS-2 pd02
+
 Crucial Jobs
 - Generating Maze (prerequisite for placing sprite)
   * collaborative
