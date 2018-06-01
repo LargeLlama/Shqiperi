@@ -1,5 +1,5 @@
 //global initated variables
-int w = 40;      //how long the lines are
+int w;     //how long the lines are
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
@@ -9,9 +9,10 @@ static int order = 1;
 
 
 void setup() {
-  //draws the window to be 400 by 400
-  size(400, 400);
 
+  //draws the window to be 400 by 400
+  size(800, 800);
+  w=width/10; //for 10 columns
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
   //sets number of columns = to width divided by object width
@@ -32,8 +33,8 @@ void setup() {
     }
   }
   current = grid[(int)random(10)][(int)random(10)];
-  exit = grid[(int)random(10)][9];
-  exit.isExit = true;
+  //exit = grid[(int)random(10)][9];
+  //exit.isExit = true;
 }
 
 void draw() {
@@ -137,7 +138,7 @@ class Cell {
   Cell right = null;
   Cell bottom = null;
   Cell left = null;
-  
+
   boolean visited = false;
   boolean noNeighbors = false;
   int o; // cell's order; used to find latest cell;
@@ -232,12 +233,12 @@ class Cell {
       rect(x, y, w, w);
     } else {
       noStroke();
-      fill(0,103,0,60);
+      fill(0, 103, 0, 60);
       rect(x, y, w, w);
     }
     if (this==current) {
-      fill(153, 0,0);
-      rect(x,y,w,w);
+      fill(153, 0, 0);
+      rect(x, y, w, w);
     }
   }
   String toString()
