@@ -1,5 +1,3 @@
-package entities;
-
 //Superclass for all living things in the game
 public abstract class Entity
 {

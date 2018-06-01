@@ -1,5 +1,3 @@
-package items;
-import entities.Hero;
 public abstract class Item
 {
     protected String _name; //the name of the item
@@ -30,8 +28,7 @@ public abstract class Item
         return tmp;
     }
     //Note that type can't change - an item can't go from weapon to food lol
-
-    public abstract void use(Hero hero);
+    
 
     @Override
     public String toString() { return _type + ": " + _name; }

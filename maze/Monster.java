@@ -1,5 +1,3 @@
-package entities;
-import items.*;
 
 public class Monster extends Entity
 {

@@ -1,6 +1,4 @@
-package items;
 //food replenishes health instantly
-import entities.Hero;
 
 public class Food extends Item
 {

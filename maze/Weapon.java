@@ -1,15 +1,13 @@
-package items;
-
-//armor affect the defense stat
-public class Armor extends Item 
+//weapons affect the strength stat
+public class Weapon extends Item 
 {
     //instance variables
-    private int _statModifier;  //how much it modifies the defense stat by
+    private int _statModifier;  //how much it modifies the strength stat by
 
     //Constructor
-    public Armor(String name, int statModifier)
+    public Weapon(String name, int statModifier)
     {
-        super(name, "Armor");
+        super(name, "Weapon");
         _statModifier = statModifier;
     }
 
@@ -27,7 +25,7 @@ public class Armor extends Item
     //test
     public static void main(String[] args)
     {
-        Armor sword = new Armor("Shield of the Double Headed Eagle", 5);
+        Weapon sword = new Weapon("Bane of Turks", 5);
         System.out.println(sword);
     }
 }

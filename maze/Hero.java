@@ -1,8 +1,4 @@
-package entities;
-
 import java.util.ArrayList;
-import items.*;
-
 public class Hero extends Entity {
 
     private ArrayList<Item> _inventory;
@@ -91,14 +87,14 @@ public class Hero extends Entity {
         }
     }
     
-    public boolean useItem(Item item)
+    public boolean useItem(Food food)
     {
-        if(_inventory.contains(item))
+        if(_inventory.contains(food))
         {
             try 
             {
-                item.use(this);
-                _inventory.remove(item);
+                food.use(this);
+                _inventory.remove(food);
                 return true;
             }
             catch (Exception e) { return false; }
