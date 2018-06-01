@@ -39,7 +39,7 @@ void setup() {
 
 void draw() {
   //sets background color
-  //background(0,0,0,10);
+  background(61,56,60);
   //background(255);
 
   //displays the grid
