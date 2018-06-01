@@ -1,5 +1,5 @@
 //global initated variables
-int w = 40;      //how long the lines are
+int w = 60;      //how long the lines are
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
@@ -10,7 +10,7 @@ static int order = 1;
 
 void setup() {
   //draws the window to be 400 by 400
-  size(400, 400);
+  size(600, 600);
 
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
