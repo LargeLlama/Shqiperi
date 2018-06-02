@@ -7,10 +7,12 @@ Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
 static int order = 1;
+PImage[] imgs;
+int imgX,imgY;
 
 
 void setup() {
-  //draws the window to be 400 by 400
+  //draws the window to be 600 by 600
   size(600, 600);
 
   //uncomment to slow down the maze generation to see it in action
@@ -35,13 +37,15 @@ void setup() {
   current = grid[0][0];
   exit = grid[(int)random(10)][9];
   exit.isExit = true;
+
+  imgs = new PImage[6];
+  imgs[0] = loadImage("sprite.gif");
 }
 
 void draw() {
   //sets background color
-  background(61,56,60);
-  //background(255);
-
+  background(61, 56, 60);
+  //background(0,103,0);
   //displays the grid
   for (int i=0; i<grid.length; i++) {
     for (int j=0; j<grid.length; j++) {
@@ -49,36 +53,37 @@ void draw() {
     }
   }
 
-    //sets the current cell visited variable to true, and gets the next neighbor
-    if (current!=null) {
-      current.visited = true;
+  //sets the current cell visited variable to true, and gets the next neighbor
+  if (current!=null) {
+    current.visited = true;
 
-      //set cell's order
-      if (current.o == 0) {
-        current.o = order; 
-        //update the order
-        order+=1;
-      }
+    //set cell's order
+    if (current.o == 0) {
+      current.o = order; 
+      //update the order
+      order+=1;
+    }
 
-      neighbor = current.checkNeighbors();
+    neighbor = current.checkNeighbors();
 
 
-      //makes sure the neighbor isn't null and that it wasn't visited
-      if (neighbor != null && !neighbor.visited)
-      {
-        neighbor.visited = true;  //sets the neighbors visited value to true
-        removeWalls(current, neighbor); //removes the needed walls
+    //makes sure the neighbor isn't null and that it wasn't visited
+    if (neighbor != null && !neighbor.visited)
+    {
+      neighbor.visited = true;  //sets the neighbors visited value to true
+      removeWalls(current, neighbor); //removes the needed walls
 
-        current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
-      }
+      current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
+    }
 
-      //no neighbors
-      else {
-        current.noNeighbors = true;
-        current = cellWithOrder(current.o-1);
-      }
+    //no neighbors
+    else {
+      current.noNeighbors = true;
+      current = cellWithOrder(current.o-1);
     }
   }
+    image(imgs[0], imgX, imgY, 60, 60);
+}
 
 void removeWalls(Cell a, Cell b)
 {
@@ -126,14 +131,41 @@ Cell cellWithOrder(int order) {
     for (int c = 0; c < grid[0].length; c++) {
       if (grid[r][c].o == order && !grid[r][c].noNeighbors ) {
         return grid[r][c];
-      }
-      else if (grid[r][c].o == order && grid[r][c].noNeighbors ){
+      } else if (grid[r][c].o == order && grid[r][c].noNeighbors ) {
         return cellWithOrder(order - 1);
       }
     }
   }
   return null;
 }
+
+//for keyboard input
+void keyPressed(){
+  //right
+  
+  
+  if(key=='d' && imgX <= width-120){
+    println("pressed d");
+    imgX += 60;
+  }
+  //down
+  else if(key=='s' && imgY <= height-120){
+    println("pressed s");
+    imgY += 60;
+  }
+  //left
+  else if(key=='a' && imgX >= w){
+    println("pressed a");
+    imgX -= 60;
+  }
+  //up
+  else if(key=='w' && imgY >= w){
+    println("pressed w");
+    imgY -= 60;
+  }
+}
+
+
 
 class Cell {
   //Cell Class variables
@@ -235,11 +267,11 @@ class Cell {
     //colors current cell
     if (visited && !noNeighbors) {
       noStroke();
-      fill(255, 0, 255, 100);
+     fill(255, 0, 255, 100);
       rect(x, y, w, w);
     } else {
       noStroke();
-      fill(0, 103, 0, 60);
+      fill(0, 103, 0,60); //green
       rect(x, y, w, w);
     }
     if (this==current) {
