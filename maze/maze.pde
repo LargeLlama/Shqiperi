@@ -8,7 +8,7 @@ Cell neighbor; //the next cell
 Cell exit; //the exit
 static int order = 1;
 PImage[] imgs;
-int imgX,imgY;
+int imgX, imgY;
 
 
 void setup() {
@@ -49,6 +49,11 @@ void draw() {
   //displays the grid
   for (int i=0; i<grid.length; i++) {
     for (int j=0; j<grid.length; j++) {
+
+      if (imgX == grid[i][j].x && imgY == grid[i][j].y) {
+        grid[i][j].cargo[0] = Cell.HERO;
+      }
+
       grid[i][j].display();
     }
   }
@@ -82,8 +87,8 @@ void draw() {
       current = cellWithOrder(current.o-1);
     }
   }
-    image(imgs[0], imgX, imgY, 60, 60);
-    //mazeFinished();
+  image(imgs[0], imgX, imgY, 60, 60);
+  //mazeFinished();
 }
 
 void removeWalls(Cell a, Cell b)
@@ -141,42 +146,49 @@ Cell cellWithOrder(int order) {
 }
 
 //for keyboard input
-void keyPressed(){
+void keyPressed() {
   //right
-  
-  
-  if(key=='d' && imgX <= width-120){
+
+
+  if (key=='d' && imgX <= width-120) {
     println("pressed d");
     imgX += 60;
   }
   //down
-  else if(key=='s' && imgY <= height-120){
+  else if (key=='s' && imgY <= height-120) {
     println("pressed s");
     imgY += 60;
   }
   //left
-  else if(key=='a' && imgX >= w){
+  else if (key=='a' && imgX >= w) {
     println("pressed a");
     imgX -= 60;
   }
   //up
-  else if(key=='w' && imgY >= w){
+  else if (key=='w' && imgY >= w) {
     println("pressed w");
     imgY -= 60;
   }
 }
 
-void mazeFinished(){
- if(imgX == exit.x && imgY==exit.y){
-  background(0); 
-  
- }
+void mazeFinished() {
+  if (imgX == exit.x && imgY==exit.y) {
+    background(0);
+  }
 }
+
+
 
 class Cell {
   //Cell Class variables
+  
+  static final int HERO = 1;
+  static final int TRAP = 2;
+  static final int  MONSTER= 3;
+
   int x, y;
   boolean walls[] = {true, true, true, true};
+  int[] cargo;
   ArrayList<Cell> neighbors;
   Cell top = null;
   Cell right = null;
@@ -196,6 +208,7 @@ class Cell {
     x = i*w;
     y = j*w;
     neighbors = new ArrayList<Cell>();
+    cargo = new int[3];
   }
 
   Cell checkNeighbors()
@@ -273,20 +286,20 @@ class Cell {
     //colors current cell
     if (visited && !noNeighbors) {
       noStroke();
-     fill(255, 0, 255, 100);
+      fill(255, 0, 255, 100);
       rect(x, y, w, w);
     } else {
       noStroke();
-      fill(0, 103, 0,60); //green
+      fill(0, 103, 0, 60); //green
       rect(x, y, w, w);
     }
     if (this==current) {
       fill(255);
       rect(x, y, w, w);
     }
-    if(this.isExit == true){
-     fill(244,66,75);
-     rect(x,y,w,w);
+    if (this.isExit == true) {
+      fill(244, 66, 75);
+      rect(x, y, w, w);
     }
   }
   String toString()
