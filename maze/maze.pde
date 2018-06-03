@@ -289,6 +289,7 @@ class Cell {
     //creates walls for botttom side of cells
     if (walls[2]) {
       line(x+w, y+w, x, y+w);
+     
     }
 
     //creates walls for left side of cells
