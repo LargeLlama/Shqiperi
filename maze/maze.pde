@@ -13,7 +13,7 @@ int imgMonsX, imgMonsY;
 
 
 void setup() {
-  Hero test = new Hero();
+  //Hero test = new Hero();
   //draws the window to be 600 by 600
   size(600, 600);
 

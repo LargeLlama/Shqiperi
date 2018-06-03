@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Heroes extends Entity {
+public class Hero extends Entity {
 
     private ArrayList<Item> _inventory;
     private int _inventorySize;
@@ -7,9 +7,9 @@ public class Heroes extends Entity {
     private int _level;
     private int _exp;
     private int _expToNextLvl; 
-    private PImage gang;
+    
 	
-	public Heroes()
+	public Hero()
     {
         super("Dubim");
         _inventory = new ArrayList<Item>();
