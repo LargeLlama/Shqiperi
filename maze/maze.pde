@@ -8,15 +8,18 @@ Cell neighbor; //the next cell
 Cell exit; //the exit
 static int order = 1;
 PImage[] imgs;
-int imgX, imgY;
+int imgHeroX, imgHeroY;
+int imgMonsX, imgMonsY;
 
 
 void setup() {
+  Hero test = new Hero();
   //draws the window to be 600 by 600
   size(600, 600);
 
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
+  
   //sets number of columns = to width divided by object width
   cols = width/w;
 
@@ -38,8 +41,15 @@ void setup() {
   exit = grid[(int)random(10)][9];
   exit.isExit = true;
 
+
+//*************IMAGES*******************
   imgs = new PImage[6];
   imgs[0] = loadImage("sprite.gif");
+  imgs[1] = loadImage("enemy.gif");
+  
+  imgMonsX = ((int) random(601) / 60) * 60;
+  imgMonsY = ((int) random(601) / 60) * 60;
+
 }
 
 void draw() {
@@ -50,7 +60,7 @@ void draw() {
   for (int i=0; i<grid.length; i++) {
     for (int j=0; j<grid.length; j++) {
 
-      if (imgX == grid[i][j].x && imgY == grid[i][j].y) {
+      if (imgHeroX == grid[i][j].x && imgHeroY == grid[i][j].y) {
         grid[i][j].cargo[0] = Cell.HERO;
       }
 
@@ -87,9 +97,12 @@ void draw() {
       current = cellWithOrder(current.o-1);
     }
   }
-  image(imgs[0], imgX, imgY, 60, 60);
+  image(imgs[0], imgHeroX, imgHeroY, 60, 60);
+  image(imgs[1], imgMonsX,imgMonsY,60,60); 
   //mazeFinished();
 }
+
+
 
 void removeWalls(Cell a, Cell b)
 {
@@ -150,29 +163,29 @@ void keyPressed() {
   //right
 
 
-  if (key=='d' && imgX <= width-120) {
+  if (key=='d' && imgHeroX <= width-120) {
     println("pressed d");
-    imgX += 60;
+    imgHeroX += 60;
   }
   //down
-  else if (key=='s' && imgY <= height-120) {
+  else if (key=='s' && imgHeroY <= height-120) {
     println("pressed s");
-    imgY += 60;
+    imgHeroY += 60;
   }
   //left
-  else if (key=='a' && imgX >= w) {
+  else if (key=='a' && imgHeroX >= w) {
     println("pressed a");
-    imgX -= 60;
+    imgHeroX -= 60;
   }
   //up
-  else if (key=='w' && imgY >= w) {
+  else if (key=='w' && imgHeroY >= w) {
     println("pressed w");
-    imgY -= 60;
+    imgHeroY -= 60;
   }
 }
 
 void mazeFinished() {
-  if (imgX == exit.x && imgY==exit.y) {
+  if (imgHeroX == exit.x && imgHeroY==exit.y) {
     background(0);
   }
 }
@@ -181,7 +194,7 @@ void mazeFinished() {
 
 class Cell {
   //Cell Class variables
-  
+
   static final int HERO = 1;
   static final int TRAP = 2;
   static final int  MONSTER= 3;
