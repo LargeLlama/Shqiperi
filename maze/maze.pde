@@ -83,6 +83,7 @@ void draw() {
     }
   }
     image(imgs[0], imgX, imgY, 60, 60);
+    //mazeFinished();
 }
 
 void removeWalls(Cell a, Cell b)
@@ -165,7 +166,12 @@ void keyPressed(){
   }
 }
 
-
+void mazeFinished(){
+ if(imgX == exit.x && imgY==exit.y){
+  background(0); 
+  
+ }
+}
 
 class Cell {
   //Cell Class variables
@@ -277,6 +283,10 @@ class Cell {
     if (this==current) {
       fill(255);
       rect(x, y, w, w);
+    }
+    if(this.isExit == true){
+     fill(244,66,75);
+     rect(x,y,w,w);
     }
   }
   String toString()
