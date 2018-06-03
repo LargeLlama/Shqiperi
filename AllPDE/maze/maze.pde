@@ -7,26 +7,26 @@ Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
 static int order = 1;
-PImage[] imgs;
-int imgHeroX, imgHeroY;
-int imgMonsX, imgMonsY;
+Hero dubim;
+Monster enemy;
 
 
 void setup() {
-  
+
   //draws the window to be 600 by 600
   size(600, 600);
-
+  dubim = new Hero();
+  enemy = new Monster();
+  
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
-  
+
   //sets number of columns = to width divided by object width
   cols = width/w;
 
   //sets number of rows = to height divided by object width
   rows = height/w;
 
-Hero dubim = new Hero();
 
   //sets a grid array to columns and rows (I.E. (5,3) would be column 5 row 3
   grid = new Cell[cols][rows];
@@ -42,27 +42,20 @@ Hero dubim = new Hero();
   exit.isExit = true;
 
 
-//*************IMAGES*******************
-  imgs = new PImage[6];
-  imgs[0] = loadImage("sprite.gif");
-  imgs[1] = loadImage("enemy.gif");
-  
-  imgMonsX = ((int) random(601) / 60) * 60;
-  imgMonsY = ((int) random(601) / 60) * 60;
 
 }
 
 void draw() {
   //sets background color
   background(61, 56, 60);
+  dubim.display();
+  enemy.display();
+  
   //background(0,103,0);
   //displays the grid
   for (int i=0; i<grid.length; i++) {
     for (int j=0; j<grid.length; j++) {
 
-      if (imgHeroX == grid[i][j].x && imgHeroY == grid[i][j].y) {
-        grid[i][j].cargo[0] = Cell.HERO;
-      }
 
       grid[i][j].display();
     }
@@ -97,8 +90,8 @@ void draw() {
       current = cellWithOrder(current.o-1);
     }
   }
-  image(imgs[0], imgHeroX, imgHeroY, 60, 60);
-  image(imgs[1], imgMonsX,imgMonsY,60,60); 
+
+ 
   //mazeFinished();
 }
 
@@ -163,29 +156,29 @@ void keyPressed() {
   //right
 
 
-  if (key=='d' && imgHeroX <= width-120) {
+  if (key=='d' && dubim.x <= width-120) {
     println("pressed d");
-    imgHeroX += 60;
+    dubim.x += 60;
   }
   //down
-  else if (key=='s' && imgHeroY <= height-120) {
+  else if (key=='s' && dubim.y <= height-120) {
     println("pressed s");
-    imgHeroY += 60;
+    dubim.y += 60;
   }
   //left
-  else if (key=='a' && imgHeroX >= w) {
+  else if (key=='a' && dubim.x >= w) {
     println("pressed a");
-    imgHeroX -= 60;
+    dubim.x -= 60;
   }
   //up
-  else if (key=='w' && imgHeroY >= w) {
+  else if (key=='w' && dubim.y >= w) {
     println("pressed w");
-    imgHeroY -= 60;
+    dubim.y -= 60;
   }
 }
 
 void mazeFinished() {
-  if (imgHeroX == exit.x && imgHeroY==exit.y) {
+  if (dubim.x == exit.x && dubim.y==exit.y) {
     background(0);
   }
 }
@@ -289,7 +282,6 @@ class Cell {
     //creates walls for botttom side of cells
     if (walls[2]) {
       line(x+w, y+w, x, y+w);
-     
     }
 
     //creates walls for left side of cells

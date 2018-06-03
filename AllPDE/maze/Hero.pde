@@ -7,7 +7,9 @@ public class Hero extends Entity {
     private int _level;
     private int _exp;
     private int _expToNextLvl;
-    private PImage gang;
+    private PImage img;
+    private int x;
+    private int y;
 
 	public Hero()
     {
@@ -106,5 +108,9 @@ public class Hero extends Entity {
         }
     }
 
+void display(){
+  img= loadImage("sprite.gif");
+  image(img, x, y, 60, 60);
+}
 
 }
