@@ -1,0 +1,53 @@
+Shqiperi
+Tim Marder, Rubin Peci, Daniel Gelfand
+APCS2 pd02
+2018-06-04 M
+
+Crucial Jobs
+
+- [COMPLETED] Generating Maze (prerequisite for placing sprite)
+  * collaborative
+  * Done using the growing tree algo, using the recursive backtracking style
+  * Algorithm (also found in README) -
+     + Pick a random cell C to start off with, and set it's visited value to true
+     + Move to any one of its unvisited neighbors, removing the walls between the cells
+     + If no neighbors are available, backtrack until a neighbor is found
+     + repeat until you backtrack back to the original cell
+  * this creates a randomly generated maze with exactly one solution everytime!
+- [COMPLETED] Creating starting and ending markers for the maze
+- [COMPLETED] Placing sprite in Maze (prerequisite for sprite movement)
+- [COMPLETED] Moving sprite through maze
+- [COMPLETED] Creating classes for Monsters, Hero and Items
+*****************************************************************************************
+
+- [WORK IN PROGRESS] Generating items for the player to pick up and use
+    * will make use of the item classes that have been made
+        + already tested that they work on the java end, need to import into processing
+- [WORK IN PROGRESS] Making an exit for the maze
+    * currently does not lead to another maze
+    * Each exit should lead to another maze, but if not that we can just make a new one for each thing.
+
+- [BRAINSTORMING] Not allowing Hero to cross wall
+
+- [UNSTARTED] Fighting display between monster and hero
+
+
+Non-essential:
+
+- Sprite movement animation
+  * collaborative
+- Including traps
+
+DONE - Maze generation by 2018-05-31
+
+DONE - Sprite inside maze with movement by 2018-06-01
+
+DONE - Enemies by 2018-06-02
+
+Making sure the Hero can't cross the borders (lines) of the cells
+
+Fighting display between enemies and hero by 2018-06-05
+
+Traps by 2018-06-05
+
+Movement animation by 2018-06-7
