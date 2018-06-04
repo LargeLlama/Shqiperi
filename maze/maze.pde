@@ -15,6 +15,7 @@ Monster enemy0;
 Monster enemy1;
 Monster enemy2;
 Weapon test;
+PImage door;
 
 
 void setup() {
@@ -353,8 +354,10 @@ class Cell {
       rect(x, y, w, w);
     }
     if (this.isExit == true) {
-      fill(244, 66, 75);
-      rect(x, y, w, w);
+      //fill(244, 66, 75);
+      //rect(x, y, w, w);
+      door = loadImage("door.gif");
+      image(door,x,y,60,60);
     }
   }
   String toString()
