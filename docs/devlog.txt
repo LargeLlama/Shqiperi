@@ -17,17 +17,17 @@ OBSTACLES OVERCOME
 - Start the algorithm
 - Maze algo done!
 - Adding images to the maze!
- 
-=======
 - Implementing .java files with packages into our processing files
+- Sprites drawn and movement is possible
+- Hero can detect monster and health can be lowered
 
->>>>>>> Stashed changes
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Serbia still exists
 - Albania is not a world power
 - Movement is not animated
-- Obects dont interact (Monster with hero)
+- The hero can walk thru walls
+- Combat still not possible
 - Tim is still obese
 
 COOL STUFF LEARNED
@@ -39,6 +39,7 @@ COOL STUFF LEARNED
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We changed ___ to ___ bc...
+We changed our .java files to .pde because it's easier to draw sprites and import processing libraries this way
 We changed our cells to be rectangles to just being a collection of lines in order to make the whole process of removing the lines easier
 We changed our algorithm to utilize elements of the recursive backtrack
 We changed our package design to having no packages and just keep all the files in the same directory to ease the transfer of .java files into Processing
@@ -65,6 +66,14 @@ The PDE automatically imports .java files into our project which is really usefu
     \____/_/ \_____\/ \___/_(   \_____\/ \_____\/ \_____\/ 
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+2018-06-03
+--------------------------------------------------------------
+Rubin Peci  :: Organize the .pde files and remove unecessary .java files
+Dan Gelfand :: Implement the sprites, movement, and turn the .java files into .pde files 
+Tim Marder  :: ???
+==============================================================
+
 
 2018-06-01
 --------------------------------------------------------------
