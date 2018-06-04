@@ -44,7 +44,7 @@ DONE - Sprite inside maze with movement by 2018-06-01
 
 DONE - Enemies by 2018-06-02
 
-Making sure the Hero can't cross the borders (lines) of the cells
+Making sure the Hero can't cross the borders (lines) of the cells by 2018-06-04
 
 Fighting display between enemies and hero by 2018-06-05
 
