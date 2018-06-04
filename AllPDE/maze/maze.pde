@@ -15,9 +15,11 @@ void setup() {
 
   //draws the window to be 600 by 600
   size(600, 600);
+  
+  //Creates objects
   dubim = new Hero();
   enemy = new Monster();
-  
+
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
 
@@ -40,21 +42,33 @@ void setup() {
   current = grid[0][0];
   exit = grid[(int)random(10)][9];
   exit.isExit = true;
-
-
-
 }
 
 void draw() {
   //sets background color
+  
+  if(isDead(dubim)){
+     
+println("dead");
+    
+  }
+  
   background(61, 56, 60);
   dubim.display();
   enemy.display();
-  
+
   //background(0,103,0);
   //displays the grid
+  println(dubim._health);
   for (int i=0; i<grid.length; i++) {
-    for (int j=0; j<grid.length; j++) {
+    for (int j=0; j<grid.length; j++) { 
+
+      //TESTING HERO AND ENEMY INTERACTION
+
+      if(hasMonster(grid[i][j],enemy) && hasHero(grid[i][j],dubim)){
+       dubim._health = 0;
+       println(dubim._health);
+       }
 
 
       grid[i][j].display();
@@ -91,9 +105,28 @@ void draw() {
     }
   }
 
- 
+
   //mazeFinished();
 }
+
+boolean isDead(Object o) {
+
+  if (o instanceof Hero) {
+    Hero h = (Hero) o;
+    return h._health==0;
+  } else {
+    return false;
+  }
+}
+
+boolean hasMonster(Cell c, Monster m) {
+  return (c.x == m.x && c.y==m.y);
+}
+
+boolean hasHero(Cell c, Hero h) {
+  return (c.x == h.x && c.y==h.y);
+}
+
 
 
 
