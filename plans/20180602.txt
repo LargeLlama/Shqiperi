@@ -1,0 +1,40 @@
+Shqiperi
+Tim Marder, Rubin Peci, Dan Gelfand
+APCS-2 pd02
+
+Crucial Jobs
+
+- [COMPLETED] Generating Maze (prerequisite for placing sprite)
+  * collaborative
+  * Done using the growing tree algo, using the recursive backtracking style
+  * Algorithm -
+     + Pick a random cell C to start off with, and set it's visited value to true
+     + Move to any one of its unvisited neighbors, removing the walls between the cells
+     + If no neighbors are available, backtrack until a neighbor is found
+     + repeat until you backtrack back to the original cell
+  * this creates a randomly generated maze with exactly one solution everytime!
+- [COMPLETED] Importing the relevant java packages we made (entities and items) into Processing so we can actually use them in the context of the maze
+- Creating starting and ending markers for the maze
+- Placing sprite in Maze (prerequisite for sprite movement)
+- Moving sprite through maze
+- Generating items for the player to pick up and use
+    * will make use of the item classes that have been made
+        + already tested that they work on the java end, need to import into processing
+- Making an exit for the maze
+    * Each exit should lead to another maze, but if not that we can just make a new one for each thing.
+
+Non-essential:
+
+- Sprite movement animation
+  * collaborative
+- Including traps
+
+DONE - Maze generation by 2018-05-31
+
+Sprite inside maze with movement by 2018-06-01
+
+Enemies by 2018-06-02
+
+Movement animation by 2018-06-03
+
+Traps by 2018-06-05

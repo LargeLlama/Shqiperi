@@ -18,12 +18,17 @@ OBSTACLES OVERCOME
 - Maze algo done!
 - Adding images to the maze!
  
+=======
+- Implementing .java files with packages into our processing files
+
+>>>>>>> Stashed changes
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Serbia still exists
 - Albania is not a world power
 - Movement is not animated
 - Obects dont interact (Monster with hero)
+- Tim is still obese
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,11 +41,14 @@ MID-DEVELOPMENT DESIGN CHANGES
 We changed ___ to ___ bc...
 We changed our cells to be rectangles to just being a collection of lines in order to make the whole process of removing the lines easier
 We changed our algorithm to utilize elements of the recursive backtrack
+We changed our package design to having no packages and just keep all the files in the same directory to ease the transfer of .java files into Processing
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Utilizing an array of booleans to determine whether to draw the lines is very useful and inituitive
 Superclasses have immense value - saves a lot of time copying code
+Packages are cool, but not necessary in this context as we need to allow the .pde files to view the files
+The PDE automatically imports .java files into our project which is really useful
 
 
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -58,23 +66,32 @@ Superclasses have immense value - saves a lot of time copying code
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+2018-06-01
+--------------------------------------------------------------
+Rubin Peci  :: Remove the package structure and move all the files into the maze folder, which contains the maze.pde file
+Dan Gelfand :: Fix the maze generation so unnecessary  backtracking no longer happens. Update the colors of the maze. 
+Tim Marder  :: ???
+==============================================================
+
 2018-05-31
 --------------------------------------------------------------
-Rubin Peci :: Fix a kink in the maze generation, create class hierarchies and packages for items and entities
-Dan Gelfand :: Finish the maze generation
-Tim Marder ::  
+Rubin Peci  :: Fix a kink in the maze generation, create class hierarchies and packages for items and entities. Update plan and create UML diagram
+Dan Gelfand :: Finish the maze generation, create the flowchart
+Tim Marder  :: ??? 
+==============================================================
 
 2018-05-30
 --------------------------------------------------------------
-Rubin Peci :: Work on the maze generation and the devlog
+Rubin Peci  :: Work on the maze generation and the devlog
 Dan Gelfand :: Work on the maze generation
-Tim Marder :: Work on the maze generation
+Tim Marder  :: Work on the maze generation
+==============================================================
 
 2018-05-29
 --------------------------------------------------------------
-Rubin Peci :: Update proposal and create the devlog!
+Rubin Peci  :: Update proposal and create the devlog!
 Dan Gelfand :: Work on the Growing Tree algorithm
-Tim Marder :: Work on the Growing Tree algorithm
+Tim Marder  :: Work on the Growing Tree algorithm
 ==============================================================
 
 2018-06-03
