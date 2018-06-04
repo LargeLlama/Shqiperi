@@ -5,6 +5,7 @@ public class Monster extends Entity
   private int x;
   private int y;
   private PImage img;
+  private Cell _currentCell;
 
   public Monster() {
     super();
@@ -32,7 +33,7 @@ public class Monster extends Entity
   }
 
   void display() {
-    img= loadImage("enemy.gif");
+    img = loadImage("enemy.gif");
     image(img, x, y, 60, 60);
   }
 }

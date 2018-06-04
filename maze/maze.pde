@@ -6,33 +6,37 @@ Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
+boolean isGenerating;
 static int level = 1;
 static int order = 1;
 Hero dubim;
+//enemy instance variables
 Monster enemy0;
 Monster enemy1;
 Monster enemy2;
+Weapon test;
 
 
 void setup() {
 
   //draws the window to be 600 by 600
   size(600, 600);
-  
+
   //Creates objects
   dubim = new Hero();
   enemy0 = new Monster();
   enemy1 = new Monster();
   enemy2 = new Monster();
+  test = new Weapon("Bane of Turks", 5);
 
+  isGenerating = true;
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
-
   //sets number of columns = to width divided by object width
-  cols = width/w;
+  cols = width / w;
 
   //sets number of rows = to height divided by object width
-  rows = height/w;
+  rows = height / w;
 
 
   //sets a grid array to columns and rows (I.E. (5,3) would be column 5 row 3
@@ -47,29 +51,26 @@ void setup() {
   current = grid[0][0];
   exit = grid[(int)random(10)][9];
   exit.isExit = true;
+
+  enemy0._currentCell = grid[enemy0.x / 60][enemy0.y / 60];
+  enemy1._currentCell = grid[enemy1.x / 60][enemy1.y / 60];
+  enemy2._currentCell = grid[enemy2.x / 60][enemy2.y / 60];
 }
 
 void draw() {
   //sets background color
+  println(dubim.getHealth());
   if (!dubim.isAlive())
     print("dead lmao\n");
-    
+  test.display();
 
-  
   background(61, 56, 60);
-  dubim.display();
-  enemy0.display();
-  enemy1.display();
-  enemy2.display();
 
   //background(0,103,0);
   //displays the grid
   println(dubim._health);
   for (int i=0; i<grid.length; i++) {
     for (int j=0; j<grid.length; j++) { 
-
-      //TESTING HERO AND ENEMY INTERACTION
-
       grid[i][j].display();
     }
   }
@@ -82,7 +83,7 @@ void draw() {
     if (current.o == 0) {
       current.o = order; 
       //update the order
-      order+=1;
+      order += 1;
     }
 
     neighbor = current.checkNeighbors();
@@ -104,7 +105,38 @@ void draw() {
     }
   }
 
+  if (dubim.isAlive())
+    dubim.display();
+  if (enemy0.isAlive())
+    enemy0.display();
+  if (enemy1.isAlive())
+    enemy1.display();
+  if (enemy2.isAlive())
+    enemy2.display();
 
+  if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
+  {
+    println("yeet0");
+    enemy0.attack(dubim);
+    dubim.attack(enemy0);
+  }
+
+  if (enemy1.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy1._currentCell)
+  {
+    println("yeet1");
+    enemy1.attack(dubim);
+    dubim.attack(enemy1);
+  }
+
+  if (enemy2.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy2._currentCell)
+  {
+    println("yeet2");
+    enemy2.attack(dubim);
+    dubim.attack(enemy2);
+  }
+
+  if (order == 100)
+    isGenerating = false;
   //mazeFinished();
 }
 
@@ -167,26 +199,29 @@ Cell cellWithOrder(int order) {
 void keyPressed() {
   //right
 
-//top,right,bottom,left
-//checks if no right wall
-  if (key=='d' && dubim.x <= width-120 && !grid[dubim.x/60][dubim.y/60].walls[1]) {
-    println("pressed d");
-    dubim.x += 60;
-  }
-  //down
-  else if (key=='s' && dubim.y <= height-120  && !grid[dubim.x/60][dubim.y/60].walls[2]) {
-    println("pressed s");
-    dubim.y += 60;
-  }
-  //left
-  else if (key=='a' && dubim.x >= w  && !grid[dubim.x/60][dubim.y/60].walls[3]) {
-    println("pressed a");
-    dubim.x -= 60;
-  }
-  //up
-  else if (key=='w' && dubim.y >= w  && !grid[dubim.x/60][dubim.y/60].walls[0]) {
-    println("pressed w");
-    dubim.y -= 60;
+  //top,right,bottom,left
+  //checks if no right wall
+  if (!isGenerating) 
+  {
+    if (key=='d' && dubim.x <= width-120 && !grid[dubim.x/60][dubim.y/60].walls[1]) {
+      println("pressed d");
+      dubim.x += 60;
+    }
+    //down
+    else if (key=='s' && dubim.y <= height-120  && !grid[dubim.x/60][dubim.y/60].walls[2]) {
+      println("pressed s");
+      dubim.y += 60;
+    }
+    //left
+    else if (key=='a' && dubim.x >= w  && !grid[dubim.x/60][dubim.y/60].walls[3]) {
+      println("pressed a");
+      dubim.x -= 60;
+    }
+    //up
+    else if (key=='w' && dubim.y >= w  && !grid[dubim.x/60][dubim.y/60].walls[0]) {
+      println("pressed w");
+      dubim.y -= 60;
+    }
   }
 }
 
@@ -201,13 +236,13 @@ void mazeFinished() {
 
 class Cell {
   //Cell Class variables
-
+  private PImage dungeon;
   static final int HERO = 1;
   static final int TRAP = 2;
   static final int  MONSTER= 3;
 
   int x, y;
-  
+
   //top,right,bottom,left
   boolean walls[] = {true, true, true, true};
   int[] cargo;
@@ -282,8 +317,6 @@ class Cell {
   void display()
   {
     //trbl = top right bottom left
-
-
     //creates walls for top side of cells
     stroke(0);
     if (walls[0]) {
