@@ -48,6 +48,8 @@ void draw() {
   //sets background color
   if (!dubim.isAlive())
     print("dead lmao\n");
+    
+
   
   background(61, 56, 60);
   dubim.display();
@@ -60,12 +62,6 @@ void draw() {
     for (int j=0; j<grid.length; j++) { 
 
       //TESTING HERO AND ENEMY INTERACTION
-
-      if(hasMonster(grid[i][j],enemy) && hasHero(grid[i][j],dubim)){
-       dubim._health = 0;
-         println(dubim._health);
-       }
-
 
       grid[i][j].display();
     }
@@ -164,23 +160,24 @@ Cell cellWithOrder(int order) {
 void keyPressed() {
   //right
 
-
-  if (key=='d' && dubim.x <= width-120) {
+//top,right,bottom,left
+//checks if no right wall
+  if (key=='d' && dubim.x <= width-120 && !grid[dubim.x/60][dubim.y/60].walls[1]) {
     println("pressed d");
     dubim.x += 60;
   }
   //down
-  else if (key=='s' && dubim.y <= height-120) {
+  else if (key=='s' && dubim.y <= height-120  && !grid[dubim.x/60][dubim.y/60].walls[2]) {
     println("pressed s");
     dubim.y += 60;
   }
   //left
-  else if (key=='a' && dubim.x >= w) {
+  else if (key=='a' && dubim.x >= w  && !grid[dubim.x/60][dubim.y/60].walls[3]) {
     println("pressed a");
     dubim.x -= 60;
   }
   //up
-  else if (key=='w' && dubim.y >= w) {
+  else if (key=='w' && dubim.y >= w  && !grid[dubim.x/60][dubim.y/60].walls[0]) {
     println("pressed w");
     dubim.y -= 60;
   }
@@ -194,6 +191,7 @@ void mazeFinished() {
 
 
 
+
 class Cell {
   //Cell Class variables
 
@@ -202,6 +200,8 @@ class Cell {
   static final int  MONSTER= 3;
 
   int x, y;
+  
+  //top,right,bottom,left
   boolean walls[] = {true, true, true, true};
   int[] cargo;
   ArrayList<Cell> neighbors;

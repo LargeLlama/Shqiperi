@@ -3,7 +3,11 @@ public class Hero extends Entity {
 
     private ArrayList<Item> _inventory;
     private int _inventorySize;
+
     private int _maxHealth;
+
+    private int _health;
+
     private int _level;
     private int _exp;
     private int _expToNextLvl;
@@ -16,7 +20,11 @@ public class Hero extends Entity {
         super("Dubim");
         _inventory = new ArrayList<Item>();
         _inventorySize = 10;
+
         _maxHealth = 100;
+
+        _health = 100;
+ 
         _level = 1;
         _exp = 0;
         _expToNextLvl = 10;
@@ -32,6 +40,7 @@ public class Hero extends Entity {
     @Override
     public int setHealth(int health)
     {
+
         if (health > _maxHealth)
         {
             return _maxHealth;
@@ -112,5 +121,6 @@ void display(){
   img= loadImage("sprite.gif");
   image(img, x, y, 60, 60);
 }
+
 
 }
