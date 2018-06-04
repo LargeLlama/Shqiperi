@@ -102,6 +102,7 @@ public abstract class Entity
         }
         return false;
     }
+    
 
     @Override
     public String toString() { return this.getName() + ": " + this.getHealth() + " HP"; }

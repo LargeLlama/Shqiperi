@@ -46,12 +46,8 @@ void setup() {
 
 void draw() {
   //sets background color
-  
-  if(isDead(dubim)){
-     
-println("dead");
-    
-  }
+  if (!dubim.isAlive())
+    print("dead lmao\n");
   
   background(61, 56, 60);
   dubim.display();
@@ -67,7 +63,7 @@ println("dead");
 
       if(hasMonster(grid[i][j],enemy) && hasHero(grid[i][j],dubim)){
        dubim._health = 0;
-       println(dubim._health);
+         println(dubim._health);
        }
 
 
@@ -108,26 +104,6 @@ println("dead");
 
   //mazeFinished();
 }
-
-boolean isDead(Object o) {
-
-  if (o instanceof Hero) {
-    Hero h = (Hero) o;
-    return h._health==0;
-  } else {
-    return false;
-  }
-}
-
-boolean hasMonster(Cell c, Monster m) {
-  return (c.x == m.x && c.y==m.y);
-}
-
-boolean hasHero(Cell c, Hero h) {
-  return (c.x == h.x && c.y==h.y);
-}
-
-
 
 
 void removeWalls(Cell a, Cell b)
