@@ -16,18 +16,20 @@ OBSTACLES OVERCOME
 - Creating the Cell class and making it out of lines instead of rectangles
 - Start the algorithm
 - Maze algo done!
+- Adding images to the maze!
  
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Serbia still exists
 - Albania is not a world power
-- Tim is still obese
-- Implementing .java files with packages into our processing files
+- Movement is not animated
+- Obects dont interact (Monster with hero)
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Albania is the greatest country ever to exist
 - Baklava is great
+- how to add images to processing
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -73,5 +75,11 @@ Tim Marder :: Work on the maze generation
 Rubin Peci :: Update proposal and create the devlog!
 Dan Gelfand :: Work on the Growing Tree algorithm
 Tim Marder :: Work on the Growing Tree algorithm
+==============================================================
+
+2018-06-03
+--------------------------------------------------------------
+Rubin Peci :: Creation of Super class and subclasses
+Dan Gelfand :: Adding images to maze and adding cell cargo
 ==============================================================
 
