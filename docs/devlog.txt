@@ -20,13 +20,13 @@ OBSTACLES OVERCOME
 - Implementing .java files with packages into our processing files
 - Sprites drawn and movement is possible
 - Hero can detect monster and health can be lowered
+- Hero can no longer walk through walls
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Serbia still exists
 - Albania is not a world power
 - Movement is not animated
-- The hero can walk thru walls
 - Combat still not possible
 - Tim is still obese
 
@@ -39,6 +39,7 @@ COOL STUFF LEARNED
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We changed ___ to ___ bc...
+We changed our view on traps to be less emphasized because it is not essential to the game.
 We changed our .java files to .pde because it's easier to draw sprites and import processing libraries this way
 We changed our cells to be rectangles to just being a collection of lines in order to make the whole process of removing the lines easier
 We changed our algorithm to utilize elements of the recursive backtrack
@@ -69,11 +70,19 @@ The PDE automatically imports .java files into our project which is really usefu
 
 2018-06-03
 --------------------------------------------------------------
+Rubin Peci  :: Prevent hero from crossing walls 
+Dan Gelfand :: Prevent hero from crossing walls
+Tim Marder  :: ???
+==============================================================
+
+
+
+2018-06-03
+--------------------------------------------------------------
 Rubin Peci  :: Organize the .pde files and remove unecessary .java files
 Dan Gelfand :: Implement the sprites, movement, and turn the .java files into .pde files 
 Tim Marder  :: ???
 ==============================================================
-
 
 2018-06-01
 --------------------------------------------------------------

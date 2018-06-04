@@ -6,12 +6,9 @@ Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
-static int level = 1;
 static int order = 1;
 Hero dubim;
-Monster enemy0;
-Monster enemy1;
-Monster enemy2;
+Monster enemy;
 
 
 void setup() {
@@ -21,9 +18,7 @@ void setup() {
   
   //Creates objects
   dubim = new Hero();
-  enemy0 = new Monster();
-  enemy1 = new Monster();
-  enemy2 = new Monster();
+  enemy = new Monster();
 
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
@@ -53,14 +48,10 @@ void draw() {
   //sets background color
   if (!dubim.isAlive())
     print("dead lmao\n");
-    
-
   
   background(61, 56, 60);
   dubim.display();
-  enemy0.display();
-  enemy1.display();
-  enemy2.display();
+  enemy.display();
 
   //background(0,103,0);
   //displays the grid
@@ -69,6 +60,12 @@ void draw() {
     for (int j=0; j<grid.length; j++) { 
 
       //TESTING HERO AND ENEMY INTERACTION
+
+      if(hasMonster(grid[i][j],enemy) && hasHero(grid[i][j],dubim)){
+       dubim._health = 0;
+         println(dubim._health);
+       }
+
 
       grid[i][j].display();
     }
@@ -107,7 +104,6 @@ void draw() {
 
   //mazeFinished();
 }
-
 
 void removeWalls(Cell a, Cell b)
 {
@@ -167,24 +163,23 @@ Cell cellWithOrder(int order) {
 void keyPressed() {
   //right
 
-//top,right,bottom,left
-//checks if no right wall
-  if (key=='d' && dubim.x <= width-120 && !grid[dubim.x/60][dubim.y/60].walls[1]) {
+
+  if (key=='d' && dubim.x <= width-120) {
     println("pressed d");
     dubim.x += 60;
   }
   //down
-  else if (key=='s' && dubim.y <= height-120  && !grid[dubim.x/60][dubim.y/60].walls[2]) {
+  else if (key=='s' && dubim.y <= height-120) {
     println("pressed s");
     dubim.y += 60;
   }
   //left
-  else if (key=='a' && dubim.x >= w  && !grid[dubim.x/60][dubim.y/60].walls[3]) {
+  else if (key=='a' && dubim.x >= w) {
     println("pressed a");
     dubim.x -= 60;
   }
   //up
-  else if (key=='w' && dubim.y >= w  && !grid[dubim.x/60][dubim.y/60].walls[0]) {
+  else if (key=='w' && dubim.y >= w) {
     println("pressed w");
     dubim.y -= 60;
   }
@@ -198,7 +193,6 @@ void mazeFinished() {
 
 
 
-
 class Cell {
   //Cell Class variables
 
@@ -207,8 +201,6 @@ class Cell {
   static final int  MONSTER= 3;
 
   int x, y;
-  
-  //top,right,bottom,left
   boolean walls[] = {true, true, true, true};
   int[] cargo;
   ArrayList<Cell> neighbors;
