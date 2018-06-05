@@ -1,5 +1,6 @@
-
+import java.util.Stack;
 //global initated variables
+Stack s;
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
@@ -19,7 +20,7 @@ Weapon test; //Weapon that will allow the Hero to slay Monsters faster
 
 //Instantiates Entities and Items
 void setup() {
-
+  s = new Stack();
   //draws the window to be 600 by 600
   size(600, 600);
 
@@ -67,7 +68,6 @@ void setup() {
 
 //Displaying the maze
 void draw() {
-
   //println(dubim.getHealth());
   if (!dubim.isAlive())
     print("dead lmao\n");
@@ -83,42 +83,40 @@ void draw() {
   }
 
   //********************MAZE GENERATION******************************
+  if (isGenerating) {
+    //sets the current cell visited variable to true, and gets the next neighbor
+    if (current!=null) {
+      current.visited = true;
 
-  //sets the current cell visited variable to true, and gets the next neighbor
-  if (current!=null) {
-    current.visited = true;
+      //set cell's order
+      if (current.o == 0) {
+        current.o = order; 
+        //update the order
+        order += 1;
+      }
 
-    //set cell's order
-    if (current.o == 0) {
-      current.o = order; 
-      //update the order
-      order += 1;
+      neighbor = current.checkNeighbors();
+
+
+      //makes sure the neighbor isn't null and that it wasn't visited
+      if (neighbor != null && !neighbor.visited)
+      {
+        neighbor.visited = true;  //sets the neighbors visited value to true
+        removeWalls(current, neighbor); //removes the needed walls
+
+        current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
+      }
+
+      //no neighbors
+      else {
+        current.noNeighbors = true;
+        current = cellWithOrder(current.o-1);
+      }
     }
-
-    neighbor = current.checkNeighbors();
-
-
-    //makes sure the neighbor isn't null and that it wasn't visited
-    if (neighbor != null && !neighbor.visited)
-    {
-      neighbor.visited = true;  //sets the neighbors visited value to true
-      removeWalls(current, neighbor); //removes the needed walls
-
-      current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
-    }
-
-    //no neighbors
-    else {
-      current.noNeighbors = true;
-      current = cellWithOrder(current.o-1);
-    }
+    if (order == 101 && current.o == 1)
+      isGenerating = false;
   }
-
-  if (order == 100 && current.o == 0)
-    isGenerating = false;
-    
   //**************************END OF MAZE GENERATION****************************************
-
 
 
   //Displaying image of the Enitities and Items in the maze
@@ -137,21 +135,21 @@ void draw() {
   //Attacks between Hero and Monsters
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
   {
-    println("yeet0");
+    //println("yeet0");
     enemy0.attack(dubim);
     dubim.attack(enemy0);
   }
 
   if (enemy1.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy1._currentCell)
   {
-    println("yeet1");
+    //println("yeet1");
     enemy1.attack(dubim);
     dubim.attack(enemy1);
   }
 
   if (enemy2.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy2._currentCell)
   {
-    println("yeet2");
+    //println("yeet2");
     enemy2.attack(dubim);
     dubim.attack(enemy2);
   }
@@ -203,6 +201,10 @@ void removeWalls(Cell a, Cell b)
 
 //auxiliary method used to find the cell with a particular order
 Cell cellWithOrder(int order) {
+  if (order == 1) {
+    return grid[0][0];
+  }
+
   for (int r = 0; r < grid.length; r++) {
     for (int c = 0; c < grid[0].length; c++) {
       if (grid[r][c].o == order && !grid[r][c].noNeighbors ) {
@@ -363,7 +365,7 @@ class Cell {
     }
 
     //colors current cell
-    if (visited && !noNeighbors) {
+    if (visited && !noNeighbors && isGenerating) {
       noStroke();
       fill(255, 0, 255, 100);
       rect(x, y, w, w);
@@ -379,7 +381,7 @@ class Cell {
       }
     }
     //colors current cell white during maze generation
-    if (this==current) {
+    if (this==current && isGenerating) {
       fill(255);
       rect(x, y, w, w);
     }
