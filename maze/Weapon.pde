@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+//<<<<<<< HEAD
 //weapons affect the strength stat
 public class Weapon extends Item
 {
@@ -36,9 +36,9 @@ public class Weapon extends Item
     image(img, x, y, 60, 60);
   }
 }
-=======
+//=======
 //weapons affect the strength stat
-public class Weapon extends Item
+/*public class Weapon extends Item
 {
   //instance variables
   private int _statModifier;  //how much it modifies the strength stat by
@@ -74,5 +74,5 @@ public class Weapon extends Item
     image(img, x, y, 60, 60);
     println("DISPLAYING SWORD");
   }
-}
->>>>>>> 8bb9ccecaf6303f6b0208ae285be1deaf49746de
+}*/
+//>>>>>>> 8bb9ccecaf6303f6b0208ae285be1deaf49746de
