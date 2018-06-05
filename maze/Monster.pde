@@ -17,8 +17,8 @@ public class Monster extends Entity
   {
     super(health, speed, strength, defense, name);
     _drop = drop;
-    x = ((int) random(601)) * 60;
-    y = ((int) random(601)) * 60;
+    x = ((int) random(601) / 60) * 60;
+    y = ((int) random(601) / 60) * 60;
   }
 
   public Item getDrop() { 

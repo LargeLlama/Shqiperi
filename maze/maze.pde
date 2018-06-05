@@ -1,5 +1,6 @@
 import java.util.Stack;
 //global initated variables
+String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 Stack s;
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
@@ -26,9 +27,9 @@ void setup() {
 
   //Creates objects
   dubim = new Hero();
-  enemy0 = new Monster();
-  enemy1 = new Monster();
-  enemy2 = new Monster();
+  enemy0 = new Monster(50, 50, 5, 3, "Monster 0", null);
+  enemy1 = new Monster(50, 50, 5, 3, "Monster 1", null);
+  enemy2 = new Monster(50, 50, 5, 3, "Monster 2", null);
   test = new Weapon("Bane of Turks", 5);
   isGenerating = true;
 
@@ -72,8 +73,9 @@ void draw() {
   if (!dubim.isAlive())
     print("dead lmao\n");
 
-
+  println(clear + "HP: " + dubim.getHealth());
   background(61, 56, 60);
+  
   //background(0,103,0);
   //displays the grid
   for (int i=0; i<grid.length; i++) {
@@ -226,22 +228,22 @@ void keyPressed() {
   if (!isGenerating) 
   {
     if (key=='d' && dubim.x <= width-120 && !grid[dubim.x/60][dubim.y/60].walls[1]) {
-      println("pressed d");
+      //println("pressed d");
       dubim.x += 60;
     }
     //down
     else if (key=='s' && dubim.y <= height-120  && !grid[dubim.x/60][dubim.y/60].walls[2]) {
-      println("pressed s");
+      //println("pressed s");
       dubim.y += 60;
     }
     //left
     else if (key=='a' && dubim.x >= w  && !grid[dubim.x/60][dubim.y/60].walls[3]) {
-      println("pressed a");
+      //println("pressed a");
       dubim.x -= 60;
     }
     //up
     else if (key=='w' && dubim.y >= w  && !grid[dubim.x/60][dubim.y/60].walls[0]) {
-      println("pressed w");
+      //println("pressed w");
       dubim.y -= 60;
     }
   }
@@ -344,7 +346,7 @@ class Cell {
   {
     //trbl = top right bottom left
     //creates walls for top side of cells
-    stroke(0);
+    stroke(255);
     if (walls[0]) {
       line(x, y, x+w, y);
     }
@@ -377,7 +379,7 @@ class Cell {
         fill(0, 103, 0, 60); //green
         rect(x, y, w, w);
       } else {
-        image(dungeon, x+10, y+10, 40, 40);
+        image(dungeon, x + 5, y + 5, 60, 60);
       }
     }
     //colors current cell white during maze generation
