@@ -134,7 +134,7 @@ void draw() {
     dubim.attack(enemy2);
   }
   test.display();
-  if (order == 100)
+  if (order == 100 && current.o==0)
     isGenerating = false;
   //mazeFinished();
 }
@@ -345,9 +345,14 @@ class Cell {
       rect(x, y, w, w);
     } else {
       noStroke();
-      fill(0, 103, 0, 60); //green
-      rect(x, y, w, w);
-      image(dungeon, x+10, y+10, 40, 40);
+
+      //done for speed purposes
+      if (isGenerating) {
+        fill(0, 103, 0, 60); //green
+        rect(x, y, w, w);
+      } else {
+        image(dungeon, x+10, y+10, 40, 40);
+      }
     }
     if (this==current) {
       fill(255);
