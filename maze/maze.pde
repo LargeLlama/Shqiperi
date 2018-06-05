@@ -17,7 +17,6 @@ Monster enemy2;
 Weapon test;
 PImage door;
 
-
 void setup() {
 
   //draws the window to be 600 by 600
@@ -29,7 +28,6 @@ void setup() {
   enemy1 = new Monster();
   enemy2 = new Monster();
   test = new Weapon("Bane of Turks", 5);
-
   isGenerating = true;
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
@@ -63,7 +61,7 @@ void draw() {
   println(dubim.getHealth());
   if (!dubim.isAlive())
     print("dead lmao\n");
-  test.display();
+
 
   background(61, 56, 60);
 
@@ -115,6 +113,7 @@ void draw() {
   if (enemy2.isAlive())
     enemy2.display();
 
+  test.display();
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
   {
     println("yeet0");
@@ -357,7 +356,7 @@ class Cell {
       //fill(244, 66, 75);
       //rect(x, y, w, w);
       door = loadImage("door.gif");
-      image(door,x,y,60,60);
+      image(door, x, y, 60, 60);
     }
   }
   String toString()
