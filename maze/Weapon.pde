@@ -31,7 +31,7 @@ public class Weapon extends Item
 
   void display()
   {
-    img = loadImage("sword.png");
+    img = loadImage("sword.gif");
     image(img, x, y, 60, 60);
   }
 }
