@@ -1,6 +1,4 @@
-import java.util.Stack;
 //global initated variables
-Stack s;
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
@@ -20,7 +18,6 @@ Weapon test; //Weapon that will allow the Hero to slay Monsters faster
 
 //Instantiates Entities and Items
 void setup() {
-  s = new Stack();
   //draws the window to be 600 by 600
   size(600, 600);
 
