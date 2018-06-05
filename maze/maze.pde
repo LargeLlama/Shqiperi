@@ -1,22 +1,23 @@
 
 //global initated variables
-int w = 60;      //how long the lines are
+int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
 Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
-boolean isGenerating;
-static int level = 1;
-static int order = 1;
-Hero dubim;
-//enemy instance variables
-Monster enemy0;
-Monster enemy1;
-Monster enemy2;
-Weapon test;
-PImage door;
+PImage door; //used to hold and display the image of the exit
+boolean isGenerating; //true if maze is still generating
+static int level = 1; //levels of the mazes
+static int order = 1; //each cell has an order, used to backtrack
+Hero dubim; // the Hero that will be in the maze
+Monster enemy0; //Monster that will be added to the maze
+Monster enemy1; //Monster that will be added to the maze
+Monster enemy2; //Monster that will be added to the maze
+Weapon test; //Weapon that will allow the Hero to slay Monsters faster
 
+
+//Instantiates Entities and Items
 void setup() {
 
   //draws the window to be 600 by 600
@@ -29,8 +30,10 @@ void setup() {
   enemy2 = new Monster();
   test = new Weapon("Bane of Turks", 5);
   isGenerating = true;
+
   //uncomment to slow down the maze generation to see it in action
   //frameRate(1);
+
   //sets number of columns = to width divided by object width
   cols = width / w;
 
@@ -47,17 +50,24 @@ void setup() {
       grid[i][j] = new Cell(i, j);
     }
   }
+
+  //start cell of maze generation
   current = grid[0][0];
+  //choose an exit 
   exit = grid[(int)random(10)][9];
   exit.isExit = true;
 
+  //assign monsters to locations in the maze
   enemy0._currentCell = grid[enemy0.x / 60][enemy0.y / 60];
   enemy1._currentCell = grid[enemy1.x / 60][enemy1.y / 60];
   enemy2._currentCell = grid[enemy2.x / 60][enemy2.y / 60];
   println(dubim.showInventory());
 }
 
+
+//Displaying the maze
 void draw() {
+
   //println(dubim.getHealth());
   if (!dubim.isAlive())
     print("dead lmao\n");
@@ -71,6 +81,8 @@ void draw() {
       grid[i][j].display();
     }
   }
+
+  //********************MAZE GENERATION******************************
 
   //sets the current cell visited variable to true, and gets the next neighbor
   if (current!=null) {
@@ -102,6 +114,14 @@ void draw() {
     }
   }
 
+  if (order == 100 && current.o == 0)
+    isGenerating = false;
+    
+  //**************************END OF MAZE GENERATION****************************************
+
+
+
+  //Displaying image of the Enitities and Items in the maze
   if (dubim.isAlive())
     dubim.display();
   if (enemy0.isAlive())
@@ -113,6 +133,8 @@ void draw() {
 
   test.display();
 
+
+  //Attacks between Hero and Monsters
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
   {
     println("yeet0");
@@ -133,13 +155,12 @@ void draw() {
     enemy2.attack(dubim);
     dubim.attack(enemy2);
   }
-  test.display();
-  if (order == 100 && current.o==0)
-    isGenerating = false;
+
+
   //mazeFinished();
 }
 
-
+//Used to remove the walls of the cells during maze generation
 void removeWalls(Cell a, Cell b)
 {
   //grabs the difference between the x values
@@ -180,7 +201,7 @@ void removeWalls(Cell a, Cell b)
   //println(current);
 }
 
-//axuiliary method use to find the cell with a particular order
+//auxiliary method used to find the cell with a particular order
 Cell cellWithOrder(int order) {
   for (int r = 0; r < grid.length; r++) {
     for (int c = 0; c < grid[0].length; c++) {
@@ -194,7 +215,7 @@ Cell cellWithOrder(int order) {
   return null;
 }
 
-//for keyboard input
+//keyboard input used to move the hero
 void keyPressed() {
   //right
 
@@ -224,6 +245,7 @@ void keyPressed() {
   }
 }
 
+//Performs action if maze is finished
 void mazeFinished() {
   if (dubim.x == exit.x && dubim.y==exit.y) {
     background(0);
@@ -243,8 +265,8 @@ class Cell {
   int x, y;
 
   //top,right,bottom,left
+  //allows for control of wall display
   boolean walls[] = {true, true, true, true};
-  //int[] cargo;
   ArrayList<Cell> neighbors;
   Cell top = null;
   Cell right = null;
@@ -264,10 +286,11 @@ class Cell {
     x = i*w;
     y = j*w;
     neighbors = new ArrayList<Cell>();
-    //cargo = new int[3];
     dungeon = loadImage("cell.png");
   }
 
+  //Selects neighbor of a cell if there is one
+  //Otherwise, returns null
   Cell checkNeighbors()
   {
     //sets a local x variable that is easier to work with
@@ -314,6 +337,7 @@ class Cell {
     }
   }
 
+  //displays the cell
   void display()
   {
     //trbl = top right bottom left
@@ -354,10 +378,12 @@ class Cell {
         image(dungeon, x+10, y+10, 40, 40);
       }
     }
+    //colors current cell white during maze generation
     if (this==current) {
       fill(255);
       rect(x, y, w, w);
     }
+    //shows door image
     if (this.isExit == true) {
       //fill(244, 66, 75);
       //rect(x, y, w, w);
@@ -365,6 +391,7 @@ class Cell {
       image(door, x, y, 60, 60);
     }
   }
+
   String toString()
   {
     return "x: " + x + "\ny: " + y + "\n";
