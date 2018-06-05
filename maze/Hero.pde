@@ -14,6 +14,7 @@ public class Hero extends Entity {
     private PImage img;
     private int x;
     private int y;
+    private Cell _currentCell;
 
 	public Hero()
     {

@@ -2,6 +2,8 @@ public abstract class Item
 {
   protected String _name; //the name of the item
   protected String _type; //what type it is
+  protected int x;
+  protected int y;
 
   //Constructors
   public Item(String name)

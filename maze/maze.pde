@@ -54,11 +54,11 @@ void setup() {
   enemy0._currentCell = grid[enemy0.x / 60][enemy0.y / 60];
   enemy1._currentCell = grid[enemy1.x / 60][enemy1.y / 60];
   enemy2._currentCell = grid[enemy2.x / 60][enemy2.y / 60];
+  println(dubim.showInventory());
 }
 
 void draw() {
-  //sets background color
-  println(dubim.getHealth());
+  //println(dubim.getHealth());
   if (!dubim.isAlive())
     print("dead lmao\n");
 
@@ -67,7 +67,6 @@ void draw() {
 
   //background(0,103,0);
   //displays the grid
-  println(dubim._health);
   for (int i=0; i<grid.length; i++) {
     for (int j=0; j<grid.length; j++) { 
       grid[i][j].display();
@@ -104,6 +103,7 @@ void draw() {
     }
   }
 
+  test.display();
   if (dubim.isAlive())
     dubim.display();
   if (enemy0.isAlive())
@@ -112,8 +112,7 @@ void draw() {
     enemy1.display();
   if (enemy2.isAlive())
     enemy2.display();
-
-  test.display();
+    
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
   {
     println("yeet0");
