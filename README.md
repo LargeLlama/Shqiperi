@@ -8,6 +8,10 @@
 
 ### To control Dubim use the keyboard's 'w' 'a' 's' 'd' characters. Follow a path until Dubim reaches the door! 🏆🏆🏆
 
+### How To Launch
+
+1. From the root of the repo cd into the maze directory
+2. In the maze directory run maze.pde and click play.
 
 ## Algorithm for Maze Generation
 1. Pick a random cell C to start off with, and set it's visited value to true
