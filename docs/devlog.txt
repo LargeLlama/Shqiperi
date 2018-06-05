@@ -118,3 +118,8 @@ Rubin Peci :: Creation of Super class and subclasses
 Dan Gelfand :: Adding images to maze and adding cell cargo
 ==============================================================
 
+2018-06-05
+--------------------------------------------------------------
+Rubin Peci :: Cell image display and weapon display
+Dan Gelfand :: Cell image display and weapon display
+==============================================================
