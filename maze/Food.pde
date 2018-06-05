@@ -26,5 +26,7 @@ public class Food extends Item
         hero.setHealth(hero.getHealth() + _healAmount);
     }
 
-  
+  public void display(){
+    
+  }
 }
