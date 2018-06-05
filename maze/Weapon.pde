@@ -13,8 +13,8 @@ public class Weapon extends Item
   {
     super(name, "Weapon");
     _statModifier = statModifier;
-    x = ((int) random(601)) * 60;
-    y = ((int) random(601)) * 60;
+    x = ((int) random(601)/60) * 60;
+    y = ((int) random(601)/60) * 60;
   }
 
   //accessor
@@ -32,7 +32,9 @@ public class Weapon extends Item
 
   void display()
   {
+    //println("x: " + x + "y: " + y);
     img = loadImage("sword.png");
     image(img, x, y, 60, 60);
+    //println("SWORD DISPLAY");
   }
 }

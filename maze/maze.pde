@@ -101,7 +101,7 @@ void draw() {
       current = cellWithOrder(current.o-1);
     }
   }
-  test.display();
+
   if (dubim.isAlive())
     dubim.display();
   if (enemy0.isAlive())
@@ -110,7 +110,9 @@ void draw() {
     enemy1.display();
   if (enemy2.isAlive())
     enemy2.display();
-    
+
+  test.display();
+
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
   {
     println("yeet0");
@@ -242,7 +244,7 @@ class Cell {
 
   //top,right,bottom,left
   boolean walls[] = {true, true, true, true};
-  int[] cargo;
+  //int[] cargo;
   ArrayList<Cell> neighbors;
   Cell top = null;
   Cell right = null;
@@ -262,7 +264,8 @@ class Cell {
     x = i*w;
     y = j*w;
     neighbors = new ArrayList<Cell>();
-    cargo = new int[3];
+    //cargo = new int[3];
+    dungeon = loadImage("cell.png");
   }
 
   Cell checkNeighbors()
@@ -344,6 +347,7 @@ class Cell {
       noStroke();
       fill(0, 103, 0, 60); //green
       rect(x, y, w, w);
+      image(dungeon, x+10, y+10, 40, 40);
     }
     if (this==current) {
       fill(255);
