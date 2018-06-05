@@ -64,7 +64,6 @@ void draw() {
 
 
   background(61, 56, 60);
-
   //background(0,103,0);
   //displays the grid
   for (int i=0; i<grid.length; i++) {
@@ -102,7 +101,6 @@ void draw() {
       current = cellWithOrder(current.o-1);
     }
   }
-
   test.display();
   if (dubim.isAlive())
     dubim.display();
@@ -133,7 +131,7 @@ void draw() {
     enemy2.attack(dubim);
     dubim.attack(enemy2);
   }
-
+  test.display();
   if (order == 100)
     isGenerating = false;
   //mazeFinished();
