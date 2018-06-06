@@ -68,11 +68,21 @@ The PDE automatically imports .java files into our project which is really usefu
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-2018-06-03
+
+2018-06-05
+--------------------------------------------------------------
+Rubin Peci  :: Worked on combat. Added items and images.
+Dan Gelfand :: Made maze generation better; updated flowchart.
+Tim Marder  :: Worked on combat. Doc cleanup.
+==============================================================
+
+
+
+2018-06-04
 --------------------------------------------------------------
 Rubin Peci  :: Prevent hero from crossing walls 
 Dan Gelfand :: Prevent hero from crossing walls
-Tim Marder  :: ???
+Tim Marder  :: Debugging and code cleanup. Started on Combat.
 ==============================================================
 
 
@@ -81,21 +91,21 @@ Tim Marder  :: ???
 --------------------------------------------------------------
 Rubin Peci  :: Organize the .pde files and remove unecessary .java files
 Dan Gelfand :: Implement the sprites, movement, and turn the .java files into .pde files 
-Tim Marder  :: ???
+Tim Marder  :: Fixed Weapon.pde.
 ==============================================================
 
 2018-06-01
 --------------------------------------------------------------
 Rubin Peci  :: Remove the package structure and move all the files into the maze folder, which contains the maze.pde file
 Dan Gelfand :: Fix the maze generation so unnecessary  backtracking no longer happens. Update the colors of the maze. 
-Tim Marder  :: ???
+Tim Marder  :: 
 ==============================================================
 
 2018-05-31
 --------------------------------------------------------------
 Rubin Peci  :: Fix a kink in the maze generation, create class hierarchies and packages for items and entities. Update plan and create UML diagram
 Dan Gelfand :: Finish the maze generation, create the flowchart
-Tim Marder  :: ??? 
+Tim Marder  :: Help with plan and code cleanup.
 ==============================================================
 
 2018-05-30
@@ -112,13 +122,6 @@ Dan Gelfand :: Work on the Growing Tree algorithm
 Tim Marder  :: Work on the Growing Tree algorithm
 ==============================================================
 
-2018-06-03
---------------------------------------------------------------
-Rubin Peci :: Creation of Super class and subclasses
-Dan Gelfand :: Adding images to maze and adding cell cargo
-==============================================================
-
-2018-06-05
 --------------------------------------------------------------
 Rubin Peci :: Cell image display and weapon display
 Dan Gelfand :: Cell image display and weapon display
