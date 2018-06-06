@@ -1,7 +1,5 @@
-import java.util.Stack;
 //global initated variables
 String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-Stack s;
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
@@ -21,7 +19,6 @@ Weapon test; //Weapon that will allow the Hero to slay Monsters faster
 
 //Instantiates Entities and Items
 void setup() {
-  s = new Stack();
   //draws the window to be 600 by 600
   size(600, 600);
 
@@ -76,7 +73,7 @@ void draw() {
 
   println(clear + "HP: " + dubim.getHealth() + "\nInventory:\n" + dubim.showInventory());
   background(61, 56, 60);
-  
+
   //background(0,103,0);
   //displays the grid
   for (int i=0; i<grid.length; i++) {
@@ -121,6 +118,7 @@ void draw() {
   }
   //**************************END OF MAZE GENERATION****************************************
 
+  println("KILLS: " + dubim._kills);
 
   //Displaying image of the Enitities and Items in the maze
   if (dubim.isAlive())
@@ -132,7 +130,14 @@ void draw() {
   if (enemy2.isAlive())
     enemy2.display();
 
-  test.display();
+  if (test.x == dubim.x && test.y == dubim.y) {
+    test._taken = true;
+    dubim.addItem(test);
+  } 
+
+  if (!test._taken) {
+    test.display();
+  }
 
   //Attacks between Hero and Monsters
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)
@@ -140,6 +145,10 @@ void draw() {
     //println("yeet0");
     enemy0.attack(dubim);
     dubim.attack(enemy0);
+    //If dubim is alive after enemy attack, then he got a kill
+    if (dubim.isAlive() && !enemy0.isAlive()) {
+      dubim._kills +=1;
+    }
   }
 
   if (enemy1.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy1._currentCell)
@@ -147,6 +156,9 @@ void draw() {
     //println("yeet1");
     enemy1.attack(dubim);
     dubim.attack(enemy1);
+    if (dubim.isAlive()&& !enemy1.isAlive()) {
+      dubim._kills +=1;
+    }
   }
 
   if (enemy2.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy2._currentCell)
@@ -154,10 +166,13 @@ void draw() {
     //println("yeet2");
     enemy2.attack(dubim);
     dubim.attack(enemy2);
+    if (dubim.isAlive()&& !enemy2.isAlive()) {
+      dubim._kills +=1;
+    }
   }
 
 
-  //mazeFinished();
+  mazeFinished();
 }
 
 //Used to remove the walls of the cells during maze generation
@@ -219,6 +234,8 @@ Cell cellWithOrder(int order) {
   return null;
 }
 
+
+
 //keyboard input used to move the hero
 void keyPressed() {
   //right
@@ -251,7 +268,7 @@ void keyPressed() {
 
 //Performs action if maze is finished
 void mazeFinished() {
-  if (dubim.x == exit.x && dubim.y==exit.y) {
+  if (dubim.x == exit.x && dubim.y==exit.y && dubim._kills == 3) {
     background(0);
   }
 }

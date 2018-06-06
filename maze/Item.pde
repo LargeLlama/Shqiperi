@@ -5,18 +5,21 @@ public abstract class Item
   protected int x;
   protected int y;
   protected Cell _currentCell;
+  protected boolean _taken;
 
   //Constructors
   public Item(String name)
   {
     _name = name;
     _type = "Item";
+    _taken = false;
   }
 
   public Item(String name, String type)
   {
     _name = name;
     _type = type;
+    _taken = false;
   }
 
   //Accessors

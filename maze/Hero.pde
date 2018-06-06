@@ -12,6 +12,7 @@ public class Hero extends Entity {
     private int x;
     private int y;
     private Cell _currentCell;
+    private int _kills;
 
 	public Hero()
     {
@@ -26,6 +27,7 @@ public class Hero extends Entity {
         _level = 1;
         _exp = 0;
         _expToNextLvl = 10;
+        _kills = 0;
     }
 
     public int getInventorySize() { return _inventorySize; }
