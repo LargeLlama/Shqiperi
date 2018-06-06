@@ -26,6 +26,7 @@ APCS2 pd02
 - [WORK IN PROGRESS] Making an exit for the maze
     * currently does not lead to another maze
     * Each exit should lead to another maze, but if not that we can just make a new one for each thing.
+    * Allow user to start a new level with the same items from the previous level.
 
 - [COMPLETED] Not allowing Hero to cross wall
 
@@ -50,6 +51,9 @@ DONE - Enemies by 2018-06-02
 DONE - Making sure the Hero can't cross the borders (lines) of the cells by 2018-06-04
 
 Fighting display between enemies and hero by 2018-06-05
+
+Allowing a user to exit a maze and proceed to the next level with the
+same items.
 
 Picking up Items and walking over Traps
 
