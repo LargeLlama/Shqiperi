@@ -1,5 +1,5 @@
 //global initated variables
-String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
