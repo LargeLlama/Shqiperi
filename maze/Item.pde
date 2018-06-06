@@ -4,6 +4,7 @@ public abstract class Item
   protected String _type; //what type it is
   protected int x;
   protected int y;
+  protected Cell _currentCell;
 
   //Constructors
   public Item(String name)

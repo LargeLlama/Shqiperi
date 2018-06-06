@@ -5,9 +5,6 @@ public class Hero extends Entity {
     private int _inventorySize;
 
     private int _maxHealth;
-
-    private int _health;
-
     private int _level;
     private int _exp;
     private int _expToNextLvl;
@@ -32,7 +29,6 @@ public class Hero extends Entity {
     }
 
     public int getInventorySize() { return _inventorySize; }
-
     public int getLevel() { return _level; }
     public int getExp() { return _exp; }
     public int getLevelUp() { return _expToNextLvl; }
@@ -46,8 +42,8 @@ public class Hero extends Entity {
         {
             return _maxHealth;
         }
-        int tmp = _maxHealth;
-        _maxHealth = health;
+        int tmp = _health;
+        _health = health;
         return tmp;
     }
 

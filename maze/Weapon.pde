@@ -15,6 +15,7 @@ public class Weapon extends Item
     _statModifier = statModifier;
     x = ((int) random(601)/60) * 60;
     y = ((int) random(601)/60) * 60;
+    
   }
 
   //accessor

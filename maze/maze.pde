@@ -60,10 +60,11 @@ void setup() {
   exit.isExit = true;
 
   //assign monsters to locations in the maze
+  dubim._currentCell = grid[dubim.x / 60][dubim.y / 60];
   enemy0._currentCell = grid[enemy0.x / 60][enemy0.y / 60];
   enemy1._currentCell = grid[enemy1.x / 60][enemy1.y / 60];
   enemy2._currentCell = grid[enemy2.x / 60][enemy2.y / 60];
-  println(dubim.showInventory());
+  test._currentCell = grid[test.x / 60][test.y / 60];
 }
 
 
@@ -73,7 +74,7 @@ void draw() {
   if (!dubim.isAlive())
     print("dead lmao\n");
 
-  println(clear + "HP: " + dubim.getHealth());
+  println(clear + "HP: " + dubim.getHealth() + "\nInventory:\n" + dubim.showInventory());
   background(61, 56, 60);
   
   //background(0,103,0);
@@ -132,7 +133,6 @@ void draw() {
     enemy2.display();
 
   test.display();
-
 
   //Attacks between Hero and Monsters
   if (enemy0.isAlive() && grid[dubim.x / 60][dubim.y / 60] == enemy0._currentCell)

@@ -2,6 +2,7 @@
 public class Monster extends Entity
 {
   private Item _drop;
+  private int _expDrop;
   private int x;
   private int y;
   private PImage img;
