@@ -1,7 +1,7 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 public class Hero extends Entity {
 
-    private ArrayList<Item> _inventory;
+    private LinkedList<Item> _inventory;
     private int _inventorySize;
 
     private int _maxHealth;
@@ -17,7 +17,7 @@ public class Hero extends Entity {
 	public Hero()
     {
         super("Dubim");
-        _inventory = new ArrayList<Item>();
+        _inventory = new LinkedList<Item>();
         _inventorySize = 10;
 
         _maxHealth = 100;
