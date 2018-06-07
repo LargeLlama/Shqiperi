@@ -14,7 +14,7 @@ PImage weapon;
 PImage monster;
 PImage bread;
 boolean isGenerating; //true if maze is still generating
-static int level = 1; //levels of the mazes
+static int level; //levels of the mazes
 static int order = 1; //each cell has an order, used to backtrack
 Hero dubim; // the Hero that will be in the maze
 Monster enemy0; //Monster that will be added to the maze
@@ -42,7 +42,7 @@ void setup() {
   bread = loadImage("bread.png");
   isGenerating = true;
   cells = new LinkedList<Cell>();
-
+  level = 1;
   //uncomment to slow down the maze generation to see it in action
   //frameRate(5);
 
