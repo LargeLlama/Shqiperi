@@ -1,12 +1,18 @@
+import java.util.LinkedList;
 //global initated variables
 String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
+LinkedList<Cell> cells;
 Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
 PImage door; //used to hold and display the image of the exit
+PImage hero;
+PImage weapon;
+PImage monster;
+PImage bread;
 boolean isGenerating; //true if maze is still generating
 static int level = 1; //levels of the mazes
 static int order = 1; //each cell has an order, used to backtrack
@@ -14,8 +20,8 @@ Hero dubim; // the Hero that will be in the maze
 Monster enemy0; //Monster that will be added to the maze
 Monster enemy1; //Monster that will be added to the maze
 Monster enemy2; //Monster that will be added to the maze
-Weapon test; //Weapon that will allow the Hero to slay Monsters faster
-
+Weapon sword; //Weapon that will allow the Hero to slay Monsters faster
+Food food;
 
 //Instantiates Entities and Items
 void setup() {
@@ -27,11 +33,18 @@ void setup() {
   enemy0 = new Monster(50, 50, 5, 3, "Monster 0", null);
   enemy1 = new Monster(50, 50, 5, 3, "Monster 1", null);
   enemy2 = new Monster(50, 50, 5, 3, "Monster 2", null);
-  test = new Weapon("Bane of Turks", 5);
+  sword = new Weapon("Bane of Turks", 5);
+  food = new Food("bread", 40);
+  door = loadImage("door.gif");
+  hero = loadImage("sprite.gif");
+  weapon = loadImage("sword.png");
+  monster = loadImage("enemy.gif");
+  bread = loadImage("baguette.jpg");
   isGenerating = true;
+  cells = new LinkedList<Cell>();
 
   //uncomment to slow down the maze generation to see it in action
-  //frameRate(1);
+  //frameRate(5);
 
   //sets number of columns = to width divided by object width
   cols = width / w;
@@ -61,7 +74,7 @@ void setup() {
   enemy0._currentCell = grid[enemy0.x / 60][enemy0.y / 60];
   enemy1._currentCell = grid[enemy1.x / 60][enemy1.y / 60];
   enemy2._currentCell = grid[enemy2.x / 60][enemy2.y / 60];
-  test._currentCell = grid[test.x / 60][test.y / 60];
+  sword._currentCell = grid[sword.x / 60][sword.y / 60];
 }
 
 
@@ -71,7 +84,7 @@ void draw() {
   if (!dubim.isAlive())
     print("dead lmao\n");
 
-  println(clear + "HP: " + dubim.getHealth() + "\nInventory:\n" + dubim.showInventory());
+  //println(clear + "HP: " + dubim.getHealth() + "\nInventory:\n" + dubim.showInventory());
   background(61, 56, 60);
 
   //background(0,103,0);
@@ -93,7 +106,9 @@ void draw() {
         current.o = order; 
         //update the order
         order += 1;
+        cells.add(current);
       }
+
 
       neighbor = current.checkNeighbors();
 
@@ -103,22 +118,27 @@ void draw() {
       {
         neighbor.visited = true;  //sets the neighbors visited value to true
         removeWalls(current, neighbor); //removes the needed walls
-
+        cells.add(neighbor);
         current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
       }
 
       //no neighbors
       else {
         current.noNeighbors = true;
-        current = cellWithOrder(current.o-1);
+        cells.remove(current);
+        current = cells.get(cells.size()-1);
       }
     }
-    if (order == 101 && current.o == 1)
+    if (cells.size() == 1)
       isGenerating = false;
   }
+
+  //breakWall();
+
+  println(current.o);
   //**************************END OF MAZE GENERATION****************************************
 
-  println("KILLS: " + dubim._kills);
+  //println("KILLS: " + dubim._kills);
 
   //Displaying image of the Enitities and Items in the maze
   if (dubim.isAlive())
@@ -130,13 +150,24 @@ void draw() {
   if (enemy2.isAlive())
     enemy2.display();
 
-  if (test.x == dubim.x && test.y == dubim.y) {
-    test._taken = true;
-    dubim.addItem(test);
+  if (sword.x == dubim.x && sword.y == dubim.y) {
+    sword._taken = true;
+    dubim.addItem(sword);
   } 
 
-  if (!test._taken) {
-    test.display();
+  if (!sword._taken) {
+    sword.display();
+  }
+  //println("health no food: " + dubim._health);
+  if (food.x == dubim.x && food.y == dubim.y) {
+    food._taken = true;
+    dubim.useItem(food);
+    //dubim.setHealth(dubim.getHealth() + food.getHealAmount());
+    //println("health after food: " + dubim._health);
+  } 
+
+  if (!food._taken) {
+    food.display();
   }
 
   //Attacks between Hero and Monsters
@@ -174,6 +205,7 @@ void draw() {
 
   mazeFinished();
 }
+
 
 //Used to remove the walls of the cells during maze generation
 void removeWalls(Cell a, Cell b)
@@ -234,8 +266,20 @@ Cell cellWithOrder(int order) {
   return null;
 }
 
-
-
+void breakWall() {
+  for (int r = 0; r < grid.length; r++) {
+    for (int c = 0; c < grid[0].length; c++) {
+      for (boolean b : grid[r][c].walls) {
+        //if there is a false
+        if (!b) {
+          return;
+        }
+      }
+      grid[r][c].walls[0] = false;
+      grid[r][c].walls[3] = false;
+    }
+  }
+}
 //keyboard input used to move the hero
 void keyPressed() {
   //right
@@ -289,6 +333,7 @@ class Cell {
   //allows for control of wall display
   boolean walls[] = {true, true, true, true};
   LinkedList<Cell> neighbors;
+  //ArrayList<Cell> neighbors;
   Cell top = null;
   Cell right = null;
   Cell bottom = null;
@@ -296,7 +341,7 @@ class Cell {
 
   boolean visited = false;
   boolean noNeighbors = false;
-  int o; // cell's order; used to find latest cell;
+  int o; // cell's order; used to find lasword cell;
 
   boolean isExit = false; //determines whether the cell is an exit - false by default
 
@@ -408,7 +453,6 @@ class Cell {
     if (this.isExit == true) {
       //fill(244, 66, 75);
       //rect(x, y, w, w);
-      door = loadImage("door.gif");
       image(door, x, y, 60, 60);
     }
   }
