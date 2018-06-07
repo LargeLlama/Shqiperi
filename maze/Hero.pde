@@ -1,126 +1,137 @@
 import java.util.LinkedList;
 public class Hero extends Entity {
 
-    private LinkedList<Item> _inventory;
-    private int _inventorySize;
+  private LinkedList<Item> _inventory;
+  private int _inventorySize;
 
-    private int _maxHealth;
-    private int _level;
-    private int _exp;
-    private int _expToNextLvl;
-    private PImage img;
-    private int x;
-    private int y;
-    private Cell _currentCell;
-    private int _kills;
+  private int _maxHealth;
+  private int _level;
+  private int _exp;
+  private int _expToNextLvl;
+  private PImage img;
+  private int x;
+  private int y;
+  private Cell _currentCell;
+  private int _kills;
 
-	public Hero()
-    {
-        super("Dubim");
-        _inventory = new LinkedList<Item>();
-        _inventorySize = 10;
+  public Hero()
+  {
+    super("Dubim");
+    _inventory = new LinkedList<Item>();
+    _inventorySize = 1;
 
-        _maxHealth = 100;
+    _maxHealth = 100;
 
-        _health = 100;
- 
-        _level = 1;
-        _exp = 0;
-        _expToNextLvl = 10;
-        _kills = 0;
-    }
+    _health = 100;
 
-    public int getInventorySize() { return _inventorySize; }
-    public int getLevel() { return _level; }
-    public int getExp() { return _exp; }
-    public int getLevelUp() { return _expToNextLvl; }
+    _level = 1;
+    _exp = 0;
+    _expToNextLvl = 10;
+    _kills = 0;
+  }
+
+  public int getInventorySize() { 
+    return _inventorySize;
+  }
+  public int getLevel() { 
+    return _level;
+  }
+  public int getExp() { 
+    return _exp;
+  }
+  public int getLevelUp() { 
+    return _expToNextLvl;
+  }
 
 
-    @Override
+  @Override
     public int setHealth(int health)
+  {
+
+    if (health > _maxHealth)
     {
-
-        if (health > _maxHealth)
-        {
-            return _maxHealth;
-        }
-        int tmp = _health;
-        _health = health;
-        return tmp;
+      return _maxHealth;
     }
+    int tmp = _health;
+    _health = health;
+    return tmp;
+  }
 
 
-    public String showInventory()
+  public String showInventory()
+  {
+    String inventory = "";
+    for (Item i : _inventory)
     {
-        String inventory = "";
-        for (Item i : _inventory)
-        {
-            inventory += i.getType() + ": " + i.getName() + "\n";
-        }
-        return inventory;
+      inventory += i.getType() + ": " + i.getName() + "\n";
     }
+    return inventory;
+  }
 
-    public int setInventorySize(int newSize)
+  public int setInventorySize(int newSize)
+  {
+    int tmp = _inventorySize;
+    _inventorySize = newSize;
+    return tmp;
+  }
+
+  public int setLevel(int level)
+  {
+    int tmp = _level;
+    _level = level;
+    return tmp;
+  }
+
+  public void levelUp()
+  {
+    if (_exp >= _expToNextLvl)
     {
-        int tmp = _inventorySize;
-        _inventorySize = newSize;
-        return tmp;
+      _exp = _exp - _expToNextLvl;
+      setLevel(_level++);
+      _expToNextLvl += 10;
     }
+  }
 
-    public int setLevel(int level)
+  public boolean isFull() { 
+    return _inventory.size() >= _inventorySize;
+  }
+
+
+  //Adds item to the inventory
+  public boolean addItem(Item item)
+  {
+    if (!isFull())
     {
-        int tmp = _level;
-        _level = level;
-        return tmp;
-    }
-
-    public void levelUp()
+      _inventory.add(item);
+      return true;
+    } else
     {
-        if (_exp >= _expToNextLvl)
-        {
-            _exp = _exp - _expToNextLvl;
-            setLevel(_level++);
-            _expToNextLvl += 10;
-        }
+      return false;
     }
+  }
 
-    public boolean isFull() { return _inventory.size() >= _inventorySize; }
-
-    public boolean addItem(Item item)
+  public boolean useItem(Food food)
+  {
+    //if (_inventory.contains(food))
+   // {
+      try
+      {
+        food.use(this);
+        this.setHealth(_health + food.getHealAmount());
+        _inventory.remove(food);
+        return true;
+      }
+      catch (Exception e) { 
+        return false;
+      }
+   /* } else
     {
-        if (!isFull())
-        {
-            _inventory.add(item);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+      return false;
+    }*/
+  }
 
-    public boolean useItem(Food food)
-    {
-        if(_inventory.contains(food))
-        {
-            try
-            {
-                food.use(this);
-                _inventory.remove(food);
-                return true;
-            }
-            catch (Exception e) { return false; }
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-void display(){
-  img= loadImage("sprite.gif");
-  image(img, x, y, 60, 60);
-}
-
-
+  void display() {
+    //img= loadImage("sprite.gif");
+    image(hero, x, y, 60, 60);
+  }
 }

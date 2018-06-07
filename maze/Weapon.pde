@@ -35,8 +35,7 @@ public class Weapon extends Item
   {
         
     //println("x: " + x + "y: " + y);
-    img = loadImage("sword.png");
-    image(img, x + 5, y + 5, 50, 50);
+    image(weapon, x + 5, y + 5, 50, 50);
     //println("SWORD DISPLAY");
   }
 }

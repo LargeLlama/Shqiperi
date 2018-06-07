@@ -13,6 +13,8 @@ public abstract class Item
     _name = name;
     _type = "Item";
     _taken = false;
+    x = ((int) random(601)/60) * 60;
+    y = ((int) random(601)/60) * 60;
   }
 
   public Item(String name, String type)
@@ -20,6 +22,8 @@ public abstract class Item
     _name = name;
     _type = type;
     _taken = false;
+    x = ((int) random(601)/60) * 60;
+    y = ((int) random(601)/60) * 60;
   }
 
   //Accessors

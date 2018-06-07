@@ -129,11 +129,17 @@ void draw() {
         current = cells.get(cells.size()-1);
       }
     }
+
     if (cells.size() == 1)
       isGenerating = false;
   }
 
   //breakWall();
+
+
+    if (order >= 101 && current.o <= 1)
+      isGenerating = false;
+  }
 
   println(current.o);
   //**************************END OF MAZE GENERATION****************************************
