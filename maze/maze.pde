@@ -134,14 +134,7 @@ void draw() {
       isGenerating = false;
   }
 
-  //breakWall();
-
-
-    if (order >= 101 && current.o <= 1)
-      isGenerating = false;
-  
-
-  
+    
   //**************************END OF MAZE GENERATION****************************************
 
   //println("KILLS: " + dubim._kills);
@@ -272,20 +265,7 @@ Cell cellWithOrder(int order) {
   return null;
 }
 
-void breakWall() {
-  for (int r = 0; r < grid.length; r++) {
-    for (int c = 0; c < grid[0].length; c++) {
-      for (boolean b : grid[r][c].walls) {
-        //if there is a false
-        if (!b) {
-          return;
-        }
-      }
-      grid[r][c].walls[0] = false;
-      grid[r][c].walls[3] = false;
-    }
-  }
-}
+
 //keyboard input used to move the hero
 void keyPressed() {
   //right
@@ -329,10 +309,7 @@ import java.util.LinkedList;
 class Cell {
   //Cell Class variables
   private PImage dungeon;
-  static final int HERO = 1;
-  static final int TRAP = 2;
-  static final int  MONSTER= 3;
-
+  
   int x, y;
 
   //top,right,bottom,left
