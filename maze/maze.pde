@@ -139,9 +139,9 @@ void draw() {
 
     if (order >= 101 && current.o <= 1)
       isGenerating = false;
-  }
+  
 
-  println(current.o);
+  
   //**************************END OF MAZE GENERATION****************************************
 
   //println("KILLS: " + dubim._kills);
