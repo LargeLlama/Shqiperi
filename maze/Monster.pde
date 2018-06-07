@@ -34,7 +34,6 @@ public class Monster extends Entity
   }
 
   void display() {
-    img = loadImage("enemy.gif");
-    image(img, x, y, 60, 60);
+    image(monster, x, y, 60, 60);
   }
 }
