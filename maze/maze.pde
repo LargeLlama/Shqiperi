@@ -34,12 +34,12 @@ void setup() {
   enemy1 = new Monster(50, 50, 5, 3, "Monster 1", null);
   enemy2 = new Monster(50, 50, 5, 3, "Monster 2", null);
   sword = new Weapon("Bane of Turks", 5);
-  food = new Food("bread", 40);
+  food = new Food("bread", 20);
   door = loadImage("door.gif");
   hero = loadImage("sprite.gif");
   weapon = loadImage("sword.png");
   monster = loadImage("enemy.gif");
-  bread = loadImage("baguette.jpg");
+  bread = loadImage("bread.png");
   isGenerating = true;
   cells = new LinkedList<Cell>();
 
@@ -70,7 +70,6 @@ void setup() {
   exit.isExit = true;
 
   //assign monsters to locations in the maze
-  dubim._currentCell = grid[dubim.x / 60][dubim.y / 60];
   enemy0._currentCell = grid[enemy0.x / 60][enemy0.y / 60];
   enemy1._currentCell = grid[enemy1.x / 60][enemy1.y / 60];
   enemy2._currentCell = grid[enemy2.x / 60][enemy2.y / 60];
@@ -84,7 +83,7 @@ void draw() {
   if (!dubim.isAlive())
     print("dead lmao\n");
 
-  //println(clear + "HP: " + dubim.getHealth() + "\nInventory:\n" + dubim.showInventory());
+  println(clear + "HP: " + dubim.getHealth() + "\nStrength: " + dubim.getStrength() + "\nDefense: " + dubim.getDefense() + "\nInventory:\n" + dubim.showInventory());
   background(61, 56, 60);
 
   //background(0,103,0);
@@ -149,9 +148,10 @@ void draw() {
   if (enemy2.isAlive())
     enemy2.display();
 
-  if (sword.x == dubim.x && sword.y == dubim.y) {
+  if (!sword._taken && sword.x == dubim.x && sword.y == dubim.y) {
     sword._taken = true;
     dubim.addItem(sword);
+    dubim.setStrength(dubim.getStrength() + sword.getModifier());
   } 
 
   if (!sword._taken) {

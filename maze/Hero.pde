@@ -8,10 +8,8 @@ public class Hero extends Entity {
   private int _level;
   private int _exp;
   private int _expToNextLvl;
-  private PImage img;
   private int x;
   private int y;
-  private Cell _currentCell;
   private int _kills;
 
   public Hero()
@@ -50,6 +48,7 @@ public class Hero extends Entity {
 
     if (health > _maxHealth)
     {
+      _health = _maxHealth;
       return _maxHealth;
     }
     int tmp = _health;
