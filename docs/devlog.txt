@@ -24,11 +24,10 @@ OBSTACLES OVERCOME
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Serbia still exists
 - Albania is not a world power
 - Movement is not animated
-- Combat still not possible
-- Tim is still obese
+- A cell may be closed off from other cells
+
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
