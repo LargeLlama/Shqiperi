@@ -1,5 +1,5 @@
 //global initated variables
-String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
@@ -275,7 +275,7 @@ void mazeFinished() {
 
 
 
-
+import java.util.LinkedList;
 class Cell {
   //Cell Class variables
   private PImage dungeon;
@@ -288,7 +288,7 @@ class Cell {
   //top,right,bottom,left
   //allows for control of wall display
   boolean walls[] = {true, true, true, true};
-  ArrayList<Cell> neighbors;
+  LinkedList<Cell> neighbors;
   Cell top = null;
   Cell right = null;
   Cell bottom = null;
@@ -306,7 +306,7 @@ class Cell {
   {
     x = i*w;
     y = j*w;
-    neighbors = new ArrayList<Cell>();
+    neighbors = new LinkedList<Cell>();
     dungeon = loadImage("cell.png");
   }
 
