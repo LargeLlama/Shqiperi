@@ -1,8 +1,10 @@
+import java.util.LinkedList;
 //global initated variables
 String clear = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 int w = 60;      //how long the lines are, width of a cell
 int cols, rows;  //the columns and rows
 Cell [][] grid;  //the grid of cells
+LinkedList<Cell> cells;
 Cell current; //the current cell
 Cell neighbor; //the next cell
 Cell exit; //the exit
@@ -39,6 +41,7 @@ void setup() {
   monster = loadImage("enemy.gif");
   bread = loadImage("baguette.jpg");
   isGenerating = true;
+  cells = new LinkedList<Cell>();
 
   //uncomment to slow down the maze generation to see it in action
   //frameRate(5);
@@ -103,6 +106,7 @@ void draw() {
         current.o = order; 
         //update the order
         order += 1;
+        cells.add(current);
       }
 
 
@@ -114,20 +118,29 @@ void draw() {
       {
         neighbor.visited = true;  //sets the neighbors visited value to true
         removeWalls(current, neighbor); //removes the needed walls
-
+        cells.add(neighbor);
         current = neighbor;      //the current cell is now the neighboring cell, and this gnarly process repeats
       }
 
       //no neighbors
       else {
         current.noNeighbors = true;
-        current = cellWithOrder(current.o-1);
+        cells.remove(current);
+        current = cells.get(cells.size()-1);
       }
     }
+
+    if (cells.size() == 1)
+      isGenerating = false;
+  }
+
+  //breakWall();
+
+
     if (order >= 101 && current.o <= 1)
       isGenerating = false;
   }
-  
+
   println(current.o);
   //**************************END OF MAZE GENERATION****************************************
 
@@ -199,6 +212,7 @@ void draw() {
   mazeFinished();
 }
 
+
 //Used to remove the walls of the cells during maze generation
 void removeWalls(Cell a, Cell b)
 {
@@ -258,8 +272,20 @@ Cell cellWithOrder(int order) {
   return null;
 }
 
-
-
+void breakWall() {
+  for (int r = 0; r < grid.length; r++) {
+    for (int c = 0; c < grid[0].length; c++) {
+      for (boolean b : grid[r][c].walls) {
+        //if there is a false
+        if (!b) {
+          return;
+        }
+      }
+      grid[r][c].walls[0] = false;
+      grid[r][c].walls[3] = false;
+    }
+  }
+}
 //keyboard input used to move the hero
 void keyPressed() {
   //right
