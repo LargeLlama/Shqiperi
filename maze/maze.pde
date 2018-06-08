@@ -154,7 +154,7 @@ void draw() {
   //println("KILLS: " + dubim._kills);
 
   //Displaying image of the Enitities and Items in the maze
-  if (dubim.isAlive())
+  if (dubim.isAlive() && !isFinished)
     dubim.display();
   if (enemy0.isAlive())
     enemy0.display();
