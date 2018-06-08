@@ -2,15 +2,17 @@
 public abstract class Entity
 {
     //Instance variables
-    protected int _health;
-    protected int _speed;
-    protected int _strength;
-    protected int _defense;
+    protected int _health; //tracks the character's health
+    protected int _speed; //tracks the character's speed
+    protected int _strength; //tracks the character's strength
+    protected int _defense; //tracks the character's defense
 
-    protected String _name;
+    protected String _name; //The character's name
 
+    //constructor
     public Entity()
     {
+        //sets default values
         _health = 100;
         _speed = 10;
         _strength = 10;
@@ -18,12 +20,14 @@ public abstract class Entity
         _name = "";
     }
 
+    //overloaded constructor
     public Entity(String name)
     {
         this();
         _name = name;
     }
 
+    //a bigger overloaded constructor
     public Entity(int health, int speed, int strength, int defense, String name)
     {
         _health = health;
@@ -50,7 +54,7 @@ public abstract class Entity
     //returns the name of the entity
     public String getName() { return _name; }
 
-    //Modifiers
+    //Mutators
 
     public int setHealth(int num)
     {
@@ -89,15 +93,15 @@ public abstract class Entity
 
     //Methods
 
-    public boolean isAlive() { return _health > 0; }
+    public boolean isAlive() { return _health > 0; } //checks to see if entity is alive
 
-    public void lowerHealth(int damageTaken){ this.setHealth(_health - damageTaken); }
+    public void lowerHealth(int damageTaken){ this.setHealth(_health - damageTaken); } //damage method
 
-    public boolean attack(Entity target)
+    public boolean attack(Entity target) //attack method
     {
-        if (target.isAlive())
+        if (target.isAlive()) //if entity is alive
         {
-            target.lowerHealth(this.getStrength() - target.getDefense());
+            target.lowerHealth(this.getStrength() - target.getDefense()); //entity takes damage
             return true;
         }
         return false;
@@ -105,5 +109,6 @@ public abstract class Entity
     
 
     @Override
+    //toString method
     public String toString() { return this.getName() + ": " + this.getHealth() + " HP"; }
 }

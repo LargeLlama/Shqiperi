@@ -2,28 +2,30 @@ public abstract class Item
 {
   protected String _name; //the name of the item
   protected String _type; //what type it is
-  protected int x;
-  protected int y;
-  protected Cell _currentCell;
-  protected boolean _taken;
+  protected int x; //x coordinate
+  protected int y; //y coordinate
+  protected Cell _currentCell; //a cell
+  protected boolean _taken; //if an item has been picked up
 
-  //Constructors
+  //Constructor
   public Item(String name)
   {
+    //sets default values
     _name = name;
     _type = "Item";
     _taken = false;
-    x = ((int) random(601)/60) * 60;
-    y = ((int) random(601)/60) * 60;
+    x = ((int) random(600)/60) * 60;
+    y = ((int) random(600)/60) * 60;
   }
 
+  //overloaded constructor
   public Item(String name, String type)
   {
     _name = name;
     _type = type;
     _taken = false;
-    x = ((int) random(601)/60) * 60;
-    y = ((int) random(601)/60) * 60;
+    x = ((int) random(600)/60) * 60;
+    y = ((int) random(600)/60) * 60;
   }
 
   //Accessors

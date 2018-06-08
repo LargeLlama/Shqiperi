@@ -29,7 +29,6 @@ UNRESOLVED ISSUES
 - Movement is not animated
 
 
-
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Albania is the greatest country ever to exist

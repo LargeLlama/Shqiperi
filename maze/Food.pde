@@ -2,9 +2,10 @@
 
 public class Food extends Item
 {
-  private int _healAmount;
-  private PImage img;
+  private int _healAmount; //holds the amount of health that the food replenishes
+  //private PImage img;
 
+  //overloaded constructor
   public Food(String name, int healAmount)
   {
     super(name, "Food");
@@ -23,12 +24,14 @@ public class Food extends Item
     _healAmount = newAmount;
     return tmp;
   }
-
+ 
+  //method to allow hero to eat the food
   public void use(Hero hero)
   {
-    hero.setHealth(hero.getHealth() + _healAmount);
+    hero.setHealth(hero.getHealth() + _healAmount); //heals the hero
   }
 
+  //displays the food
   public void display() {
     image(bread, x + 5, y + 5, 50, 50);
   }
