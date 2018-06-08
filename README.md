@@ -14,7 +14,7 @@ Following the structure of a binary tree and mimicking the use of recursive back
 
 ### How to Play
 
-Dubim (main character) will appear in the first dungeon after the maze finishes generating. You must control Dubim with WASD keys to lead him through his path to the exit. However, Dubim must defeat all the monsters in the current dungeon before moving on to the next. Here are several tips that will guide you to success:
+Dubim (main character) will appear in the upperleft corner after the maze finishes generating. You must control Dubim with WASD keys to lead him through his path to the exit. However, Dubim must defeat all the monsters in the current dungeon before moving on to the next. Here are several tips that will guide you to success:
 - Walk over monsters to attack them. Beware, they will attack you as well.
 - Pick up a weapon as soon as possible. It will help you defeat monsters faster.
 - If possible, try to pick up and eat food right before moving on to the next dungeon. That way, you will begin the next dungeon with more health.
@@ -25,6 +25,7 @@ More Information:
 - You cannot consume food if you have max health.
 - Leveling up requires a certain amount of xp. Killing monsters gives xp.
 - The more level ups, the more xp will be required to level up.
+
 
 ### How it Works (The Algo)
 1. Let C be a list of cells, initially empty. Add one cell to C(upperleft in our case).

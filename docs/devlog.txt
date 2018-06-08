@@ -123,7 +123,17 @@ Dan Gelfand :: Work on the Growing Tree algorithm
 Tim Marder  :: Work on the Growing Tree algorithm
 ==============================================================
 
+2018-06-03
 --------------------------------------------------------------
 Rubin Peci :: Cell image display and weapon display
 Dan Gelfand :: Cell image display and weapon display
 ==============================================================
+
+2018-06-07
+--------------------------------------------------------------
+Rubin Peci :: Infinite levels
+Dan Gelfand :: Updated maze generation
+Tim Marder :: Can't eat food if hero has full health
+==============================================================
+
+
