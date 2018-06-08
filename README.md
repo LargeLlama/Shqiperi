@@ -3,7 +3,7 @@
 ## APCS2 Final Project -- Maze Runner
 
 ### Proposal
-**Click _HERE_(./docs/proposal.pdf) our proposal*
+**Click [_HERE_](./docs/proposal.pdf) our proposal**
 
 ### A maze is randomly generated using the algorithm provided below. An Albanian warrior by the name of Dubim must face monsters, traps, and pick up items along the way to survive and escape the maze! ⚔️⚔️⚔️
 
