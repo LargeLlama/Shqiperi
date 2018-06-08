@@ -1,5 +1,5 @@
 # Shqiperi
-##Rubin Peci, Tim Marder, and Daniel Gelfand
+## Rubin Peci, Tim Marder, and Daniel Gelfand
 ## APCS2 Final Project -- Maze Runner
 
 ### Proposal
