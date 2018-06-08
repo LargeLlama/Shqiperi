@@ -4,7 +4,6 @@ public class Weapon extends Item
 {
   //instance variables
   private int _statModifier;  //how much it modifies the strength stat by
-  private PImage img; //image
   private int x; //x coordinate
   private int y; //y coordinate
 
@@ -30,12 +29,9 @@ public class Weapon extends Item
     _statModifier = newModifier;
     return tmp;
   }
-
-  //displays weapons
-  void display()
+  
+ void display()
   {  
-    //println("x: " + x + "y: " + y);
     image(weapon, x + 5, y + 5, 50, 50);
-    //println("SWORD DISPLAY");
   }
 }

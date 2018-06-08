@@ -90,8 +90,11 @@ public class Hero extends Entity {
     if (_exp >= _expToNextLvl) //if amt of xp is enough to level up
     {
       _exp = _exp - _expToNextLvl;
-      setLevel(_level++); //character levels up
-      _expToNextLvl += 10;
+      _level += 1; //character levels up
+      _strength += 3;
+      _defense += 3;
+      _speed += 5;
+      _expToNextLvl += 15;
     }
   }
 

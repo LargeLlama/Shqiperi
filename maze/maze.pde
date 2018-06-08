@@ -21,11 +21,12 @@ PImage bread; //used to hold and display the image of the bread
 PImage victory;
 
 boolean isGenerating; //true if maze is still generating
-static int level; //levels of the mazes
+static int level = 1; //levels of the mazes
 static int order = 1; //each cell has an order, used to backtrack
 boolean isFinished; //checks if dubim reaches exit with proper kills
+boolean setup = false;
 
-Hero dubim; // the Hero that will be in the maze
+Hero dubim = new Hero(); // the Hero that will be in the maze
 Monster enemy0; //Monster that will be added to the maze
 Monster enemy1; //Monster that will be added to the maze
 Monster enemy2; //Monster that will be added to the maze
@@ -38,10 +39,9 @@ void setup() {
   size(600, 600);
 
   //Creates objects
-  dubim = new Hero();
-  enemy0 = new Monster(50, 50, 5, 3, "Monster 0", null);
-  enemy1 = new Monster(50, 50, 5, 3, "Monster 1", null);
-  enemy2 = new Monster(50, 50, 5, 3, "Monster 2", null);
+  enemy0 = new Monster(25 + (10 * level), 50, 6 * level, 4 * level, "Monster 0", null, 5 * level);
+  enemy1 = new Monster(25 + (10 * level), 50, 6 * level, 4 * level, "Monster 2", null, 5 * level);
+  enemy2 = new Monster(25 + (10 * level), 50, 7 * level, 6 * level, "Monster 2", null, 5 * level);
   sword = new Weapon("Bane of Turks", 5);
   food = new Food("bread", 20);
 
@@ -56,7 +56,7 @@ void setup() {
   isGenerating = true; //Checks to see if the maze is being created
   isFinished = false; //Dubim initially not finished with the maze
   cells = new LinkedList<Cell>(); //list that contains the cells; used for maze generation
-  level = 1; //keeps track of the level
+
   //uncomment to slow down the maze generation to see it in action
   //frameRate(5);
 
@@ -93,12 +93,8 @@ void setup() {
 
 //Displaying the maze
 void draw() {
-  //println(dubim.getHealth());
-  if (!dubim.isAlive())
-    print("dead lmao\n");
-
   //Displays stats in the console
-  println(clear + "HP: " + dubim.getHealth() + "\nStrength: " + dubim.getStrength() + "\nDefense: " + dubim.getDefense() + "\nInventory:\n" + dubim.showInventory());
+  println(clear + "Maze Level: " + level + "\nDubim Level: " + dubim.getLevel() + "\nHP: " + dubim.getHealth() + "\nStrength: " + dubim.getStrength() + "\nDefense: " + dubim.getDefense() + "\nInventory:\n" + dubim.showInventory());
   background(61, 56, 60);
 
   //background(0,103,0);
@@ -175,11 +171,11 @@ void draw() {
   }
   //println("health no food: " + dubim._health);
 
-  //To pick up food
-  if (food.x == dubim.x && food.y == dubim.y) {
+  //To pick up foods
+  if (!food._taken && food.x == dubim.x && food.y == dubim.y) {
     if (dubim._health != 100) { //only eats the food is health is < 100
       food._taken = true;
-      dubim.useItem(food);
+      dubim.setHealth(dubim._health + food.getHealAmount());
     }
     //dubim.setHealth(dubim.getHealth() + food.getHealAmount());
     //println("health after food: " + dubim._health);
@@ -208,6 +204,8 @@ void draw() {
     dubim.attack(enemy1);
     if (dubim.isAlive()&& !enemy1.isAlive()) {
       dubim._kills +=1;
+      dubim._exp += enemy1._expDrop;
+      dubim.levelUp();
     }
   }
 
@@ -218,12 +216,21 @@ void draw() {
     dubim.attack(enemy2);
     if (dubim.isAlive()&& !enemy2.isAlive()) {
       dubim._kills +=1;
+      dubim._exp += enemy1._expDrop;
+      dubim.levelUp();
     }
+  }
+
+  if (!dubim.isAlive())
+  {
+    clear();
+    background(255, 255, 255);
+    PImage gameover = loadImage("gameover.png");
+    image(gameover, 300 - (178 / 2), 300 - (178 / 2));
   }
 
   //When character reaches exit, runs mazeFinished() method
   mazeFinished();
-  
 }
 
 
@@ -324,7 +331,11 @@ void mazeFinished() {
   }
 
   if (isFinished) {
-    image(victory, 0, 0, 600, 600);
+    //image(victory, 0, 0, 600, 600);
+    setup();
+    isFinished = false;
+    dubim._kills = 0;
+    level++;
   }
 }
 

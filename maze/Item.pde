@@ -45,7 +45,6 @@ public abstract class Item
   }
   //Note that type can't change - an item can't go from weapon to food lol
 
-  public abstract void display();
 
   @Override
     public String toString() { 

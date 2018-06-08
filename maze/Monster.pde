@@ -5,7 +5,6 @@ public class Monster extends Entity
   private int _expDrop; //the xp that the monster drops
   private int x; //x coordinate
   private int y; //y coordinate
-  private PImage img; //the image
   private Cell _currentCell; //the cell
 
   //constructor
@@ -17,10 +16,11 @@ public class Monster extends Entity
   }
 
   //overloaded constructor
-  public Monster(int health, int speed, int strength, int defense, String name, Item drop)
+  public Monster(int health, int speed, int strength, int defense, String name, Item drop, int exp)
   {
     super(health, speed, strength, defense, name);
     _drop = drop;
+    _expDrop = exp;
     x = ((int) random(600) / 60) * 60;
     y = ((int) random(600) / 60) * 60;
   }
