@@ -26,7 +26,7 @@ UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - Albania is not a world power
 - Movement is not animated
-- A cell may be closed off from other cells
+
 
 
 COOL STUFF LEARNED
