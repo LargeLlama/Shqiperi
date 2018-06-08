@@ -18,7 +18,7 @@ Dubim (main character) will appear in the upperleft corner after the maze finish
 - Walk over monsters to attack them. Beware, they will attack you as well.
 - Pick up a weapon as soon as possible. It will help you defeat monsters faster.
 - If possible, try to pick up and eat food right before moving on to the next dungeon. That way, you will begin the next dungeon with more health.
-- You escaped the maze once you defeat all monsters and reached the exit. However, you may move on without collecting useful items. That is not advisable, and it's highly recommended that you pick up anything useful.
+- You escaped the maze once you defeat all monsters and reached the exit. You may escape without collecting useful items. That is not advisable, and it's highly recommended that you pick up anything useful.
 
 
 More Information:
