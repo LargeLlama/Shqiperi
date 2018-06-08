@@ -18,10 +18,12 @@ PImage hero; //used to hold and display the image of the hero
 PImage weapon; //used to hold and display the image of the sword
 PImage monster; //used to hold and display the image of the monsters
 PImage bread; //used to hold and display the image of the bread
+PImage victory;
 
 boolean isGenerating; //true if maze is still generating
 static int level; //levels of the mazes
 static int order = 1; //each cell has an order, used to backtrack
+boolean isFinished; //checks if dubim reaches exit with proper kills
 
 Hero dubim; // the Hero that will be in the maze
 Monster enemy0; //Monster that will be added to the maze
@@ -42,15 +44,17 @@ void setup() {
   enemy2 = new Monster(50, 50, 5, 3, "Monster 2", null);
   sword = new Weapon("Bane of Turks", 5);
   food = new Food("bread", 20);
-  
+
   //Loads images for each object
   door = loadImage("door.gif");
   hero = loadImage("sprite.gif");
   weapon = loadImage("sword.png");
   monster = loadImage("enemy.gif");
   bread = loadImage("bread.png");
-  
+  victory = loadImage("victory.png");
+
   isGenerating = true; //Checks to see if the maze is being created
+  isFinished = false; //Dubim initially not finished with the maze
   cells = new LinkedList<Cell>(); //list that contains the cells; used for maze generation
   level = 1; //keeps track of the level
   //uncomment to slow down the maze generation to see it in action
@@ -144,7 +148,7 @@ void draw() {
       isGenerating = false; //stop generation
   }
 
-    
+
   //**************************END OF MAZE GENERATION****************************************
 
   //println("KILLS: " + dubim._kills);
@@ -170,7 +174,7 @@ void draw() {
     sword.display();
   }
   //println("health no food: " + dubim._health);
-  
+
   //To pick up food
   if (food.x == dubim.x && food.y == dubim.y) {
     if (dubim._health != 100) { //only eats the food is health is < 100
@@ -219,6 +223,7 @@ void draw() {
 
   //When character reaches exit, runs mazeFinished() method
   mazeFinished();
+  
 }
 
 
@@ -265,23 +270,23 @@ void removeWalls(Cell a, Cell b)
 
 /*
 //auxiliary method used to find the cell with a particular order
-Cell cellWithOrder(int order) {
-  if (order == 1) {
-    return grid[0][0];
-  }
-
-  for (int r = 0; r < grid.length; r++) {
-    for (int c = 0; c < grid[0].length; c++) {
-      if (grid[r][c].o == order && !grid[r][c].noNeighbors ) {
-        return grid[r][c];
-      } else if (grid[r][c].o == order && grid[r][c].noNeighbors ) {
-        return cellWithOrder(order - 1);
-      }
-    }
-  }
-  return null;
-}
-*/
+ Cell cellWithOrder(int order) {
+ if (order == 1) {
+ return grid[0][0];
+ }
+ 
+ for (int r = 0; r < grid.length; r++) {
+ for (int c = 0; c < grid[0].length; c++) {
+ if (grid[r][c].o == order && !grid[r][c].noNeighbors ) {
+ return grid[r][c];
+ } else if (grid[r][c].o == order && grid[r][c].noNeighbors ) {
+ return cellWithOrder(order - 1);
+ }
+ }
+ }
+ return null;
+ }
+ */
 
 //keyboard input used to move the hero
 void keyPressed() {
@@ -315,7 +320,11 @@ void keyPressed() {
 //Performs action if maze is finished
 void mazeFinished() {
   if (dubim.x == exit.x && dubim.y==exit.y && dubim._kills == 3) {
-    background(0);
+    isFinished = true;
+  }
+
+  if (isFinished) {
+    image(victory, 0, 0, 600, 600);
   }
 }
 
@@ -325,7 +334,7 @@ import java.util.LinkedList;
 class Cell {
   //Cell Class variables
   private PImage dungeon;
-  
+
   int x, y; //coordinates
 
   //top, right, bottom, left
@@ -333,7 +342,7 @@ class Cell {
   boolean walls[] = {true, true, true, true};
   LinkedList<Cell> neighbors;
   //ArrayList<Cell> neighbors;
-  
+
   Cell top = null;
   Cell right = null;
   Cell bottom = null;
@@ -398,8 +407,7 @@ class Cell {
     {
       int random = floor(random(neighbors.size())); //chooses a random neighbor
       return neighbors.get(random);
-    } 
-    else
+    } else
     {
       noNeighbors = true;
       return null;
