@@ -3,7 +3,7 @@
 ## APCS2 Final Project -- Maze Runner
 
 ### Proposal
-**Click [_HERE_](./docs/proposal.pdf) our proposal**
+**Click [_HERE_](./docs/proposal.pdf) for our proposal**
 
 ### Description
 Following the structure of a binary tree and mimicking the use of recursive backtracking, a maze is generated using the 'Growing Tree' algorithm provided below. Once the maze is generated, an Albanian warrior by the name of Dubim must face monsters and pick up items along the way to reach the exit and survive the maze! ⚔️⚔️⚔️🏆🏆🏆
