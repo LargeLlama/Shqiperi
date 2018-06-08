@@ -39,11 +39,11 @@ void setup() {
   size(600, 600);
 
   //Creates objects
-  enemy0 = new Monster(25 + (10 * level), 50, 6 * level, 4 * level, "Monster 0", null, 5 * level);
-  enemy1 = new Monster(25 + (10 * level), 50, 6 * level, 4 * level, "Monster 2", null, 5 * level);
-  enemy2 = new Monster(25 + (10 * level), 50, 7 * level, 6 * level, "Monster 2", null, 5 * level);
+  enemy0 = new Monster(25 + (10 * level), 50, 3 + (level * 4), level * 4, "Monster 0", null, 4 * level);
+  enemy1 = new Monster(25 + (10 * level), 50, 3 + (level * 4), level * 4, "Monster 1", null, 4 * level);
+  enemy2 = new Monster(25 + (10 * level), 50, 3 + (level * 4), level * 4, "Monster 2", null, 4 * level);
   sword = new Weapon("Bane of Turks", 5);
-  food = new Food("bread", 20);
+  food = new Food("bread", 15 + (15 * level));
 
   //Loads images for each object
   door = loadImage("door.gif");

@@ -95,6 +95,7 @@ public class Hero extends Entity {
       _defense += 3;
       _speed += 5;
       _expToNextLvl += 15;
+      _health = 100;
     }
   }
 
