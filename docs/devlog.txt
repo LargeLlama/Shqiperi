@@ -21,6 +21,7 @@ OBSTACLES OVERCOME
 - Sprites drawn and movement is possible
 - Hero can detect monster and health can be lowered
 - Hero can no longer walk through walls
+- Maze generation is no longer slow!
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -34,15 +35,16 @@ COOL STUFF LEARNED
 - Albania is the greatest country ever to exist
 - Baklava is great
 - how to add images to processing
+- how to generate a maze using a binary tree model
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-We changed ___ to ___ bc...
 We changed our view on traps to be less emphasized because it is not essential to the game.
 We changed our .java files to .pde because it's easier to draw sprites and import processing libraries this way
 We changed our cells to be rectangles to just being a collection of lines in order to make the whole process of removing the lines easier
 We changed our algorithm to utilize elements of the recursive backtrack
 We changed our package design to having no packages and just keep all the files in the same directory to ease the transfer of .java files into Processing
+We changed from ArrayList to LinkedList for more efficent addition and removal from lists.
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,6 +52,7 @@ Utilizing an array of booleans to determine whether to draw the lines is very us
 Superclasses have immense value - saves a lot of time copying code
 Packages are cool, but not necessary in this context as we need to allow the .pde files to view the files
 The PDE automatically imports .java files into our project which is really useful
+The placement of code is very important to the outcome.
 
 
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
